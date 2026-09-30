@@ -1,0 +1,10 @@
+K(5,1,1): record=54 ub=53; 32 prime-order classes, 5 already decided
+  p3:t0c5s,b0c0f         orbits=  162 infeasible bound=53.999999999999844 (59.18s)
+  p3:t1c1s,b0c0f         orbits=  162 infeasible bound=54.00000000000001 (36.07s)
+  p3:t1c2s,b0c0f         orbits=  162 infeasible bound=54.000000000000284 (14.45s)
+  p3:t1c0s,b0c0f         orbits=  198 infeasible bound=53.99999999999998 (32.15s)
+  p2:t0c0s,b0c1f         orbits=  243 infeasible bound=54.000000000000014 (284.32s)
+  p2:t0c1s,b0c1f         orbits=  243 infeasible bound=53.999999999999744 (219.37s)
+  p2:t0c2s,b0c1f         orbits=  243 timeout    bound=50.0 (300.02s)
+  p2:t0c3s,b0c1f         orbits=  243 timeout    bound=48.0 (300.02s)
+  p2:t0c4s,b0c1f         orbits=  243 timeout    bound=48.0 (300.02s)

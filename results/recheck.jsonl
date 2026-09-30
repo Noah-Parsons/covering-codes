@@ -1,0 +1,16 @@
+{"target": "K(1,7,1)", "ub": 47, "class": "p7:t0c0s,b1c0f", "solver": "cpsat", "seed": 2026, "orbits": 60, "status": "infeasible", "info": null, "solve_s": 0.9}
+{"target": "K(1,7,1)", "ub": 47, "class": "p5:t0c0s,b1c0f", "solver": "cpsat", "seed": 2026, "orbits": 96, "status": "infeasible", "info": null, "solve_s": 0.05}
+{"target": "K(1,7,1)", "ub": 47, "class": "p3:t0c1s,b0c0f", "solver": "cpsat", "seed": 2026, "orbits": 128, "status": "infeasible", "info": null, "solve_s": 0.03}
+{"target": "K(1,7,1)", "ub": 47, "class": "p3:t0c1s,b1c0f", "solver": "cpsat", "seed": 2026, "orbits": 128, "status": "timeout", "info": null, "solve_s": 150.01}
+{"target": "K(1,7,1)", "ub": 47, "class": "p3:t0c1s,b2c0f", "solver": "cpsat", "seed": 2026, "orbits": 128, "status": "timeout", "info": null, "solve_s": 150.02}
+{"target": "K(1,7,1)", "ub": 47, "class": "p7:t0c0s,b1c0f", "solver": "highs", "seed": 2026, "orbits": 60, "status": "infeasible", "info": 47.99999999999977, "solve_s": 0.68}
+{"target": "K(1,7,1)", "ub": 47, "class": "p5:t0c0s,b1c0f", "solver": "highs", "seed": 2026, "orbits": 96, "status": "infeasible", "info": 55.999999999999936, "solve_s": 0.51}
+{"target": "K(1,7,1)", "ub": 47, "class": "p3:t0c1s,b0c0f", "solver": "highs", "seed": 2026, "orbits": 128, "status": "infeasible", "info": 47.99999999999997, "solve_s": 0.01}
+{"target": "K(1,7,1)", "ub": 47, "class": "p3:t0c1s,b1c0f", "solver": "highs", "seed": 2026, "orbits": 128, "status": "infeasible", "info": 47.9999999999998, "solve_s": 0.37}
+{"target": "K(1,7,1)", "ub": 47, "class": "p3:t0c1s,b2c0f", "solver": "highs", "seed": 2026, "orbits": 128, "status": "infeasible", "info": 47.999999999999865, "solve_s": 2.71}
+{"target": "K(1,7,1)", "ub": 47, "class": "p3:t0c0s,b2c0f", "solver": "highs", "seed": 2026, "orbits": 144, "status": "infeasible", "info": 47.99999999999995, "solve_s": 3.16}
+{"target": "K(1,7,1)", "ub": 47, "class": "p2:t0c0s,b0c1f", "solver": "highs", "seed": 2026, "orbits": 192, "status": "infeasible", "info": 47.99999999999997, "solve_s": 1.64}
+{"target": "K(1,7,1)", "ub": 47, "class": "p2:t0c0s,b0c2f", "solver": "highs", "seed": 2026, "orbits": 192, "status": "infeasible", "info": 47.99999999999997, "solve_s": 1.63}
+{"target": "K(1,7,1)", "ub": 47, "class": "p2:t0c0s,b1c1f", "solver": "highs", "seed": 2026, "orbits": 192, "status": "infeasible", "info": 48.00000000000016, "solve_s": 11.01}
+{"target": "K(1,7,1)", "ub": 47, "class": "p2:t0c0s,b1c2f", "solver": "highs", "seed": 2026, "orbits": 192, "status": "infeasible", "info": 47.99999999999998, "solve_s": 6.15}
+{"target": "K(1,7,1)", "ub": 47, "class": "p3:t0c0s,b1c0f", "solver": "highs", "seed": 2026, "orbits": 192, "status": "infeasible", "info": 53.99999999999999, "solve_s": 364.35}

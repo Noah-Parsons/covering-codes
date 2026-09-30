@@ -1,0 +1,256 @@
+                          Bounds on K(n, R), R = 1, 2, 3
+
+    (lower and upper bounds on the size of binary optimal covering codes)
+
+n   R=1                    R=2            R=3
+
+1   11
+
+2   22                     11
+
+3   21                     23             11
+
+4   b 42                   22             24
+
+5   b 71 b                 21             23
+
+6   c 122 c                g 44           22
+
+7   h 161 h                g 73 g         21
+
+8   c 3210              z 12277 g         g 46
+
+9   o 62 j              p 164 y           g 78 g
+
+10  i 107­120 j         r 24­30 w         j 1211481 g
+
+11  z 180­192 g         r 37­44 x         u 15­16 y
+
+12  f 342­380 j         r 62­78 o         t 18­28 s
+
+13  g 598­704 p         m 97­128 y        n 28­42 s
+
+14  l 1172­1408         x 159­248 z       n 44­64 y
+
+15  h 20485983 h        r 310­384 v       n 70­112 x
+
+16  f 4096              s 512­768         r 115­192 t
+
+17  y 7419­8192         g 859­1536        r 187­320 v
+
+18  f 14564­16384       s 1702­2944 v     t 316­512 k
+
+19  r 26309­31744 n     y 2898­4096 y     d 513­1024
+
+20  r 52618­63488       r 5330­8192       y 892­2048
+
+21 g 96125­122880 u     y 9900­14336 d    m 1475­3072 v
+
+22  f 190651­245760     r 17336­24576 d   r 2544­4096
+
+23 y 352827­393216 u    r 30686­32768 d   h 40961 h
+
+24  f 699051­786432     y 60381­65536     d 8128­8192
+
+25 g 1298238­1556480 v  y 107218­131072   s 13896­16384
+
+26 f 2581111­3112960    g 191229­262144   r 24256­32768
+
+27 v 4794174­5767168 v  r 380496­524288   r 40683­65536
+
+28 r 9587084­11534336   y 683980­1048576  d 80835­131072
+
+29 y 17997161­23068672 r 1231554­2097152 m 140567­262144
+
+30 f 35791395­46137344  r 2461892­4194304 m 248218­524288
+
+31  h 67108864 h        y 4464944­8388480 x r 443515­524288 d
+
+32  f 134217728         r 8170308­16776960 y 855613­1048576
+
+33 g 253523901­268435456 y 16210701­32505856 v d 1516208­2097152
+
+                        1
+                      Bounds on K(n, R), R = 4, 5, 6
+
+(lower and upper bounds on the size of binary optimal covering codes)
+
+n   R=4                R=5        R=6
+
+4   11
+
+5   25                 11
+
+6   24                 26         11
+
+7   23                 25         27
+
+8   22                 24         26
+
+9   21                 23         25
+
+10  g 49               22         24
+
+11  g 717 g            21         23
+
+12  j 11­12 g          g 412      22
+
+13  w 12­16 y       g 733 g       21
+
+14  d 16­28 s       u 10­12 g     g 416
+
+15  t 22­32 v       w 12­16 y     g 758 g
+
+16  t 33­64         m 13­28 l     q 9­12 g
+
+17  n 52­112 x      t 19­32 v     w 11­16 y
+
+18  s 83­192 l      t 27­64       r 12­28 l
+
+19  n 128­256 v     t 40­64 y     t 16­32 v
+
+20  n 208­512       n 62­128      d 24­64
+
+21  n 336­896 x     n 95­256      n 33­64 y
+
+22 n 553­1536 v     n 150­512     n 49­128
+
+23 r 912­2048 v     n 235­640 v   n 73­224 f
+
+24  n 1505­4096     n 376­1024 v  n 113­384 f
+
+25 r 2558­4096 y    n 608­2048    n 172­512 y
+
+26  r 4273­8192     n 981­4096    d 275­1024
+
+27 r 7181­14336 f   n 1601­4096 y n 419­1984 v
+
+28 r 12482­24576 f  r 2646­8192   n 663­3584 v
+
+29 n 21098­32768 y r 4355­14336 f n 1068­4096 y
+
+30 y 38067­65536    n 7307­24576 f n 1727­8192
+
+31 m 64680­126976 v n 12220­32768 y n 2808­14336 f
+
+32 y 110467­245760 m n 20556­61440 m n 4597­24576 f
+
+33 r 193704­393216 f n 34731­90112 v n 7476­32768 y
+
+                    2
+                    Bounds on K(n, R), R = 7, 8, 9, 10
+
+(lower and upper bounds on the size of binary optimal covering codes)
+
+n   R=7       R=8         R=9        R = 10
+
+7   11
+
+8   28        11
+
+9   27        29          11
+
+10  26        28          210        11
+
+11  25        27          29         211
+
+12  24        26          28         210
+
+13  23        25          27         29
+
+14  22        24          26         28
+
+15  21        23          25         27
+
+16  g 420     22          24         26
+
+17  g 797 g   21          23         25
+
+18 q 9­12 g   g 425       22         24
+
+19 w 10­16 y  g 7153 g    21         23
+
+20 w 12­28 l  q 9­12 g    g 430      22
+
+21 t 14­32 v w 10­16 y    g 7233 g   21
+
+22 n 20­64    w 11­28 l   q 9­12 g   g 436
+
+23 n 29­64 y  t 13­32 v   9­16 y     g 7342 g
+
+24 n 41­128   t 18­64     w 10­28 l q 9­12 g
+
+25 n 60­224 f n 25­64 y   t 12­32 v  9­16 y
+
+26 n 88­384 f d 36­128    t 16­56 v w 10­28 l
+
+27 n 132­512 y n 50­224 f n 22­64 y t 11­32 v
+
+28 n 202­960 m n 73­384 f m 30­128 r 15­56 v
+
+29 n 311­1408 v n 106­512 y d 43­224 f t 19­64 y
+
+30 d 486­2048 y n 158­896 v n 61­384 f n 27­128
+
+31 n 743­2048 y n 238­1344 v n 88­512 y m 37­224 f
+
+32 n 1179­4096 d 369­2048 y n 127­896 v d 53­384 f
+
+33 n 1878­8192 n 557­2048 y n 188­1024 v n 74­512 y
+
+                       3
+Key to the tables for K(n, R), lower bounds
+
+unmarked  trivial
+b         (Taussky-Todd, 1948)
+c         (Stanton­Kalbfleisch, 1968 and 1969)
+d         (Bhandari­Chanduka­Lal, 1998)
+f         (van Wee, 1988)
+g         (Cohen­Lobstein­Sloane, 1986)
+h         perfect code
+i         (Bertolo­O¨ sterg°ard­Weakly, 2004)
+j         (O¨ sterg°ard, 2005)
+l         (Habsieger, 1997)
+m         (Honkala, 1991)
+n         (Li­Chen, 1994)
+o         (O¨ sterg°ard­Blass, 2001)
+p         (O¨ sterg°ard­Weakly, 2000)
+q         (K´eri­O¨ sterg°ard, 2003­2006)
+r         (Habsieger­Plagne, 2000)
+s         (Zhang, 1991)
+t         (Zhang­Lo, 1992)
+u         (K´eri, 2006)
+v         (Plagne, 2008)
+w         (K´eri, 2009)
+x         (Lang­Quistorff­Schneider, 2006)
+y         (Haas, 2007­2008)
+z         (Blass­Litsyn, 1998 and 1999)
+
+          4
+Key to the tables for K(n, R), upper bounds
+
+unmarked  trivial
+b         (Taussky-Todd, 1948)
+c         (Stanton­Kalbfleisch, 1968)
+d         (Etzion­Greenberg, 1993)
+f         (van Wee, 1988)
+g         (Cohen­Lobstein­Sloane, 1986)
+h         perfect code
+j         (Wille, 1990 and 1996)
+k         (Brualdi­Pless, 1990)
+l         (Cohen­Honkala­Litsyn­Lobstein, 1997)
+m         (Honkala, 1991)
+n         (Li­Chen, 1994)
+o         (O¨ sterg°ard, 1994)
+p         (O¨ sterg°ard­Weakly, 1999)
+s         (H¨am¨al¨ainen­Honkala­Kaikkonen­Litsyn, 1993)
+t         (Ha¨m¨al¨ainen­Honkala­Litsyn­O¨ sterg°ard, 1995)
+u         (Mollard, 1981)
+v         (O¨ sterg°ard­Kaikkonen, 1998)
+w         (H¨am¨ala¨inen­Rankinen, 1991)
+x         (Honkala­H¨am¨al¨ainen, 1988)
+y         (Graham­Sloane, 1985)
+z         (Bertolo­Di Pasquale­Santisi, 2006)
+
+          5
+

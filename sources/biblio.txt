@@ -1,0 +1,560 @@
+References
+
+   [1] G. E. Andrews, The Theory of Partitions, Addison-Wesley, Reading,
+       1976.
+
+   [2] P. Baldi, On a generalized family of colorings, Graphs Combin., 6
+       (1990), 95­110.
+
+   [3] Zs. Baranyai, On the factorization of the complete uniform hyper-
+       graph, Infinite and finite sets (Colloq., Keszthely, 1973; dedicated to P.
+       Erdos on his 60th birthday), Vol. I, Colloq. Math. Soc. Ja´nos Bolyai,
+       Vol. 10, North-Holland, Amsterdam, (1975), 91­108.
+
+   [4] A. Barg, At the dawn of the theory of codes, Mathematical Intelli-
+       gencer, 15 (1993), 20­26.
+
+   [5] R. Bertolo, P. R. J. O¨ sterg°ard and W. D. Weakley, An updated table
+       of binary/ternary mixed covering codes, J. Combin. Des., 12 (2004),
+       157­176.
+
+   [6] R. Bertolo, F. Di Pasquale, F. Santisi and others, Sistemi per totocal-
+       cio, totip, superenalotto, totogol, http://www.toto1x2.it.
+
+   [7] M. C. Bhandari and C. Durairajan, A note on bounds for q-ary cov-
+       ering codes, IEEE Trans. Inform. Theory, 42 (1996), 1640­1642.
+
+   [8] J. Bierbrauer and J. Fridrich: Constructing good covering codes for
+       applications in steganography, to appear.
+
+   [9] D. Billington, Lattices and degree sequences of uniform hypergraphs,
+       Ars Combin., 21A (1986), 9­19.
+
+ [10] U. Blass and S. Litsyn, Several new lower bounds on the size of codes
+       with covering radius one, IEEE Trans. Inform. Theory, 44 (1998),
+       1998­2002.
+
+ [11] U. Blass and S. Litsyn, Several new lower bounds for football pool
+       systems, Ars Combinatoria, 50 (1998), 297­302.
+
+ [12] U. Blass and S. Litsyn, The smallest covering code of length 8 and
+       radius 2 has 12 words, Ars Combin., 52 (1999), 309­318.
+
+ [13] A. Blokhuis and C. W. H. Lam, More coverings by rook domains, J.
+       Combin. Theory Ser. A, 36 (1984), 240­244.
+
+ [14] B. Bolloba´s, Sperner systems consisting of pairs of complementary
+       subsets, J. Combin. Theory Ser. A, 15 (1973), 363­366.
+
+ [15] R. C. Bose, S. S. Shrikhande and E. T. Parker, Further results on the
+       construction of mutually orthogonal Latin squares and the falsity of
+       Euler's conjecture, Canad. J. Math., 12 (1960), 189­203.
+
+                                                 1
+[16] A. Brace and D. E. Daykin, Sperner type theorems for finite sets,
+      Combinatorics (Proc. Conf. Combinatorial Math., Math. Inst., Ox-
+      ford) (D. J. A. Welsh and D. R. Woodall, Eds.), Inst. Math. Appl.,
+      Southend-on-Sea, 1972, 18­37.
+
+[17] J. Carlson and D. Stolarski, The correct solution to Berlekamp's
+      switching game, Discrete Math., 287 (2004), 145­150.
+
+[18] M. A. Chateauneuf, C. J. Colbourn and D. L. Kreher, Covering arrays
+      of strength three, Des. Codes Cryptogr., 16 (1999), 235­242.
+
+[19] M. Chateauneuf and D. L. Kreher, On the state of strength-three
+      covering arrays, J. Combin. Des., 10 (2002), 217­238.
+
+[20] W. Chen and I. S. Honkala, Lower bounds for q-ary covering codes,
+      IEEE Trans. Inform. Theory, 36 (1990), 664­671.
+
+[21] J. C. Cock and P. R. J. O¨ sterg°ard, Ternary covering codes derived
+      from BCH codes, J. Combin. Theory Ser. A, 80 (1997), 283­289.
+
+[22] G. Cohen, I. Honkala, S. Litsyn, and A. Lobstein, Covering Codes,
+      North-Holland, Amsterdam (1997).
+
+[23] G. D. Cohen, S. N. Litsyn, A. C. Lobstein and H. F. Mattson, Covering
+      radius 1985-1994, Appl. Algebra Engrg. Comm. Comput., 8 (1997),
+      173­239.
+
+[24] G. D. Cohen, A. C. Lobstein, and N. J. A. Sloane, Further results on
+      the covering radius of codes, IEEE Trans. Inform. Theory, 32 (1986),
+      680­694.
+
+[25] G. D. Cohen, A. C. Lobstein, and N. J. A. Sloane, On a conjecture
+      concerning coverings of Hamming space, Applied algebra, algorithmics
+      and error-correcting codes (Toulouse, 1984), Lecture Notes in Com-
+      puter Science, Vol. 228, Springer-Verlag, Berlin (1986), 79-89.
+
+[26] C. J. Colbourn, Strength two covering arrays: existence tables and
+      projection, Discrete Math., 308 (2008), 772­786.
+
+[27] C. J. Colbourn, CA tables for t=2,3,4,5,6,
+      http://www.public.asu.edu/ccolbou/src/tabby/catable.html.
+
+[28] C. J. Colbourn and J. H. Dinitz, Mutually orthogonal Latin squares:
+      a brief survey of constructions, J. Statist. Plann. Inference, 95 (2001),
+      9­48.
+
+[29] E. Dantsin, A. Goerdt, E. A. Hirsch and U. Sch¨oning, Deterministic
+      algorithms for k-SAT based on covering codes and local search, Au-
+      tomata, languages and programming (Geneva, 2000) Lecture Notes in
+      Computer Science, Vol. 1853, Springer-Verlag, Berlin (2000), 236­247.
+
+[30] R. Davies and G. F. Royle, Graph domination, tabu search and the
+      football pool problem, Discrete Appl. Math., 74 (1997), 217­228.
+
+                                               2
+[31] I. J. Dejter and K. T. Phelps, Ternary Hamming and binary perfect
+      covering codes. Codes and association schemes (A. Barg and S. Litsyn
+      eds.), DIMACS Ser. Discrete Math. Theoret. Comput. Sci., Amer.
+      Math. Soc., Providence, RI, 56 (2001), 111­113.
+
+[32] P. Delsarte and J.-M. Goethals, Unrestricted codes with the Golay
+      parameters are unique, Discrete Math., 12 (1975), 211­224.
+
+[33] J. D´enes and A. D. Keedwell, Latin squares and their applications,
+      Academic Press, New York and London, 1974.
+
+[34] F. Di Pasquale and P. R. J. O¨ sterg°ard, An improved upper bound for
+      the football pool problem for nine matches, J. Combin. Theory Ser.
+      A, 102 (2003), 204­206.
+
+[35] A. Dr, On the covering radius of Reed­Solomon codes, Discrete Math.,
+      126 (1994), 99­105.
+
+[36] P. Erdos, C. Ko and R. Rado, Intersection theorems for systems of
+      finite sets, Quart. J. Math. Oxford, 12 (1961), 313­318.
+
+[37] T. Etzion, G. Greenberg and I. S. Honkala, Normal and abnormal
+      codes, IEEE Trans. Inform. Theory, 39 (1993), 1453­1456.
+
+[38] H. Fernandes and E. Rechtschaffen, The football pool problem for 7
+      and 8 matches, J. Combin. Theory Ser. A, 35 (1983), 109­114.
+
+[39] A. Fontaine and W. Peterson, Group code equivalence and optimum
+      codes, IRE Trans. Circuit Theory, 6 (1959), 60­70.
+
+[40] D. Gijswijt, Matrix Algebras and Semidefinite Programming Tech-
+      niques for Codes, PhD thesis, University of Amsterdam, (2005), 93
+      pp.
+
+[41] M. J. E. Golay, Notes on digital coding, Proc. I.R.E. (IEEE), 37
+      (1949), 657.
+
+[42] S. W. Golomb and E. C. Posner, Rook domains, Latin squares, affine
+      planes, and error-distributing codes, IEEE Trans. Inform. Theory, 10
+      (1964), 196­208.
+
+[43] R. L. G. Gommard and A. Plagne, K5(7,3)¡=100, J. Combin. Theory
+      Ser. A, 104 (2003), 365­370.
+
+[44] D. M. Gordon, La Jolla               covering  repository,
+      http://www.ccrwest.org/cover.html.
+
+[45] R. L. Graham and N. J. A. Sloane, On the covering radius of codes,
+      IEEE Trans. Inform. Theory, 31 (1985), 385­401.
+
+[46] W. Haas, Lower bounds for q-ary codes of covering radius one, Discrete
+      Math., 219 (2000), 97­106.
+
+3
+[47] W. Haas, Binary and ternary codes of covering radius one: some new
+      lower bounds, Discrete Math., 256 (2002), 161­178.
+
+[48] W. Haas, Lower bounds for the football pool problem for 7 and 8
+      matches, Electron. J. Combin, 14 (2007),
+      http://www.combinatorics.org/Volume 14/v14i1toc.html.
+
+[49] W. Haas, Lower bounds for quaternary covering codes, submitted.
+
+[50] W. Haas, J.-C. Schlage-Puchta and J. Quistorff, Lower bounds on cov-
+      ering codes via partition matrices, Journal of Combinatorial Theory
+      (Ser. A), to appear.
+
+[51] L. Habsieger, Lower bounds for q-ary coverings by spheres of radius
+      one, J. Combin. Theory Ser. A, 67 (1994), 199­222.
+
+[52] L. Habsieger, A new lower bound for the football pool problem for 7
+      matches, J. Th`eor. Nombres Bordeaux, 8 (1996), 481­484.
+
+[53] L. Habsieger, Some new lower bounds for ternary covering codes, Elec-
+      tron. J. Combin (2), 3 (1996),
+      http://www.combinatorics.org/Volume 3/foatatoc.html.
+
+[54] L. Habsieger, Binary codes with covering radius one: some new lower
+      bounds, Discrete Math., 176 (1997), 115­130.
+
+[55] L. Habsieger and A. Plagne, New lower bounds for covering codes,
+      Discrete Math., 222 (2000), 125­149.
+
+[56] H. O. H¨ama¨la¨inen, I. S. Honkala, M. K. Kaikkonen and S. N. Litsyn,
+      Bounds for binary multiple covering codes, Des. Codes Cryptogr., 3
+      (1993), 251­275.
+
+[57] H. H¨ama¨la¨inen and S. Rankinen, Upper bounds for football pool prob-
+      lems and mixed covering codes, J. Combin. Theory Ser. A, 56 (1991),
+      84­95.
+
+[58] R. W. Hamming, Error detecting and error correcting codes, Bell Sys-
+      tem Tech. J., 29 (1950), 147­160.
+
+[59] H. J. Helgert, Noncyclic generalizations of BCH and Srivastava codes,
+      Information and Control, 21 (1972), 280­290.
+
+[60] J. W. P. Hirschfeld, Projective Geometries over Finite Fields, 2nd ed.,
+      Clarendon, Oxford (1998).
+
+[61] B. Hnich, S. D. Prestwich, E. Selensky and B. M. Smith, Constraint
+      models for the covering test problem, Constraints, 11 (2006), 199­219.
+
+[62] I. S. Honkala, Lower bounds for binary covering codes, IEEE Trans.
+      Inform. Theory, 34 (1988), 326­329.
+
+[63] I. S. Honkala, Modified bounds for covering codes, IEEE Trans. In-
+      form. Theory, 37 (1991), 351­365.
+
+                                               4
+[64] I. S. Honkala, A Graham-Sloane type construction for s-surjective ma-
+      trices, J. Algebraic Combin., 1 (1992), 347­351.
+
+[65] I. S. Honkala, A new lower bound on codes with covering radius one,
+      Proc, Int. Symp. Information Theory and its Applications, Sydney,
+      Australia, 1994, Vol. 1., 39­41.
+
+[66] I. S. Honkala and H. O. H¨ama¨la¨inen, A new construction for covering
+      codes, IEEE Trans. Inform. Theory, 34 (1988), 1343­1344.
+
+[67] I. S. Honkala and H. O. H¨am¨ala¨inen, Bounds for abnormal binary
+      codes, IEEE Trans. Inform. Theory, 37 (1991), 372­375.
+
+[68] D. R. Hughes and F. C. Piper, Design Theory, Cambridge University
+      Press, Cambridge, 1985.
+
+[69] K. A. Johnson and R. Entringer, Largest induced subgraphs of the
+      n-cube that contain no 4-cycles, J. Combin. Theory Ser. B, 46 (1989),
+      346­355.
+
+[70] S. M. Johnson, A new lower bound for coverings by rook domains,
+      Utilitas Math., 1 (1972), 121­140.
+
+[71] J. G. Kalbfleisch and R. G. Stanton, A combinatorial theorem of
+      matching, J. London Math. Soc. (1), 44 (1969), 60­64; and (2), 1
+      (1969), 398.
+
+[72] J. G. Kalbfleisch, R. G. Stanton and J. D. Horton, On covering sets
+      and error-correcting codes, J. Combin. Theory Ser. A, 11 (1971), 233­
+      250.
+
+[73] J. G. Kalbfleisch and P. H. Weiland, Some new results for the covering
+      problem, Recent Progress in Combinatorics (Proc. 3rd Waterloo Conf.
+      Combinatorics, 1968) (W. T. Tutte, ed.) Academic, New York (1969),
+      37­45.
+
+[74] H. J. L. Kamps and J. H. van Lint, The football pool problem for 5
+      matches, J. Combin. Theory, 3 (1967), 315­325.
+
+[75] H. J. L. Kamps and J. H. van Lint, A covering problem, Combinato-
+      rial theory and its applications, Colloq. Math. Soc. Ja´nos Bolyai, Bal-
+      atonfu¨red, Hungary (1969), North-Holland, Amsterdam (1970), 679­
+      685.
+
+[76] P. Kaski and P. R. J. O¨ sterg°ard, Classification Algorithms for Codes
+      and Designs, Springer, Berlin, 2006.
+
+[77] G. O. H. Katona, Two applications (for search theory and truth func-
+      tions) of Sperner type theorems, Period. Math. Hungar., 3 (1973),
+      19­26.
+
+[78] G. K´eri, Types of superregular matrices and the number of n-arcs
+      and complete n-arcs in PG(r, q), Journal of Combinatorial Designs,
+      14 (2006), 363-390 ´es 16 (2008), 262.
+
+                                               5
+[79] G. K´eri, On small covering codes in arbitrary mixed Hamming spaces,
+      Studia Sci. Math. Hungar., 44 (2007), 517­534.
+
+[80] G. K´eri, The covering radius of extreme binary 2-surjective codes, Des.
+      Codes Cryptogr., 46 (2008), 191­198.
+
+[81] G. K´eri, Tables for covering codes,
+      http://www.sztaki.hu/keri/codes.
+
+[82] G. K´eri, Tables for n-arcs and lists for complete n-arcs in PG(r, q),
+      http://www.sztaki.hu/keri/n-arcs.
+
+[83] G. K´eri and A´ . Kisv¨olcsey, On computing the Hamming distance, Acta
+      Cybernetica, 16 (2004), 443­449.
+
+[84] G. K´eri and P. R. J. O¨ sterg°ard, On the covering radius of small codes,
+      Studia Sci. Math. Hungar., 40 (2003), 243­256.
+
+[85] G. K´eri and P. R. J. O¨ sterg°ard, Bounds for covering codes over large
+      alphabets, Des. Codes Cryptogr., 137 (2005), 45­60.
+
+[86] G. K´eri and P. R. J. O¨ sterg°ard, Further results on the covering radius
+      of small codes, Discrete Math., 307 (2007), 69­77.
+
+[87] G. K´eri and P. R. J. O¨ sterg°ard, The number of inequivalent (2R +
+      3, 7)R optimal covering codes, J. Integer Seq., 9 (2006), Article 06.4.7
+      (electronic).
+
+[88] G. K´eri and P. R. J. O¨ sterg°ard, On the minimum size of binary codes
+      with length 2R + 4 and covering radius R, Des. Codes Cryptogr., 48
+      (2008), 165­169.
+
+[89] G. K´eri and Zs. Tuza, Balanced degree sequences of uniform hyper-
+      graphs, Note, manuscript.
+
+[90] D. J. Kleitman and J. Spencer, Families of k-independent sets, Discrete
+      Math., 6 (1973), 255­262.
+
+[91] E. Kolev, Codes over GF(3) of length 5, 27 codewords and covering
+      radius 1, J. Combin. Designs, 1 (1993), 265­275.
+
+[92] E. Kolev, Lower bounds for mixed covering codes of length 5, C. R.
+      Acad. Bulgare Sci., (8) 46 (1993), 9­11.
+
+[93] E. Kolev, Mixed covering codes with two binary and four ternary
+      coordinates, Applied algebra, algebraic algorithms and error-correcting
+      codes Lecture Notes in Computer Science, Vol. 948, Springer-Verlag,
+      Berlin (1995), 312­322.
+
+[94] E. Kolev, A (9, 56)1 binary code does not exist, C. R. Acad. Bulgare
+      Sci. (11­12), 51 (1998), 25­28.
+
+[95] E. Kolev and R. Hill, An improved lower bound on the covering num-
+      ber K2(9, 1), Discrete Math., 197­198 (1999), 483­489.
+
+                                               6
+ [96] E. Kolev and I. Landgev, On some mixed covering codes of small
+       length, Algebraic Coding (G. Cohen, S. Litsyn, A. Lobstein, and
+       G. Z´emor, eds.), Lecture Notes in Computer Science, Vol. 781,
+       Springer-Verlag, Berlin (1994), 38­50.
+
+ [97] K. U. Koschnick, A new upper bound for the football pool problem
+       for nine matches J. Combin. Theory Ser. A, 62 (1993), 162­167.
+
+ [98] P. J. M. van Laarhoven, E. H. L. Aarts, J. H. van Lint, and L. T.
+       Wille, New upper bounds for the football pool problem for 6, 7, and
+       8 matches, J. Combin. Theory Ser. A, 52 (1989), 304­312.
+
+ [99] W. Lang, J. Quistorff and E. Schneider, Integer programming for cov-
+       ering codes, J. Combin. Math. Combin. Comput., 66 (2008), 279­288.
+
+[100] W. Lang, J. Quistorff and E. Schneider, New results on integer pro-
+       gramming for codes, Congr. Numer., 188 (2007), 97­107.
+
+[101] J. Lawrence, R. N. Kacker, Yu Lei, D. R. Kuhn and M. Forbes, Binary
+       covering arrays, Designs, Codes and Cryptography, submitted.
+
+[102] D. Li and W. Chen, New lower bounds for binary covering codes, IEEE
+       Trans. Inform. Theory, 40 (1994), 1122­1129.
+
+[103] J. Linderoth, F. Margot and G. Thain, A natural turf for high-
+       throughput computing,
+       http://www.lehigh.edu/jtl3/papers/tg-football.pdf.
+
+[104] J. Linderoth, F. Margot and G. Thain, Improving bounds on the foot-
+       ball pool problem via symmetry reduction and high-throughput com-
+       puting, http://wpweb2.tepper.cmu.edu/fmargot/PDF/football.pdf.
+
+[105] B. Lindstr¨om, Group partitions and mixed perfect codes, Canad.
+       Math. Bull., 18 (1975), 57­60.
+
+[106] J. H. van Lint and G. J. M. van Wee, Generalized bounds on bi-
+       nary/ternary mixed packing and covering codes, J. Combin. Theory
+       Ser. A, 57 (1991), 130­143.
+
+[107] C. Lo and Z. Zhang, New lower bounds for K3(n, R) from linear in-
+       equalities, Communication Sciences Institute, Electrical Engineering
+       Systems, University of Southern California, (1992), 15 pp.
+
+[108] A. C. Lobstein, Rayon de recouvrement: une bibliographie? Non, la
+       bibliographie!, http://www.infres.enst.fr/lobstein/biblio.html.
+
+[109] A. C. Lobstein and G. J. M. van Wee, On normal and subnormal q-
+       ary codes, IEEE Trans. Inform. Theory, 35 (1989), 1291­1295; and 36
+       (1990), 1498.
+
+[110] F. J. MacWilliams and N. J. A. Sloane, The Theory of Error-
+       Correcting Codes, North-Holland, Amsterdam, 1977.
+
+                                                 7
+[111] E. Mattioli, Sopra una particolare propriet`a dei gruppi Abeliani finiti,
+       Ann. Scuola Norm. Sup. Pisa (3), 3 (1950), 59­65.
+
+[112] J. G. Mauldon, Covering theorems for groups, Quart. J. of Math.
+       (Oxford), (2) 1 (1950), 284­287.
+
+[113] P. R. J. O¨ sterg°ard, A new binary code of length 10 and covering radius
+       1, IEEE Trans. Inform. Theory, 37 (1991), 179­180.
+
+[114] P. R. J. O¨ sterg°ard, Upper bounds for q-ary covering codes, IEEE
+       Trans. Inform. Theory, 37 (1991), 660­664; and 37 (1991), 1738.
+
+[115] P. R. J. O¨ sterg°ard, Further results on (k, t)-subnormal covering codes,
+       IEEE Trans. Inform. Theory, 38 (1992), 206­210.
+
+[116] P. R. J. O¨ sterg°ard, Construction methods for mixed covering
+       codes, Analysis, Algebra, and Computers in Mathematical Research:
+       Proc. 21st Nordic Congress of Mathematicians (M. Gyllenberg and
+       L. E. Persson, eds.), Marcel Dekker, New York (1994), 387­407.
+
+[117] P. R. J. O¨ sterg°ard, New upper bounds for the football pool problem
+       for 11 and 12 matches, J. Combin. Theory Ser. A, 67 (1994), 161­168.
+
+[118] P. R. J. O¨ sterg°ard, A combinatorial proof for the football pool problem
+       for six matches, J. Combin. Theory Ser. A, 76 (1996), 160­163.
+
+[119] P. R. J. O¨ sterg°ard, The football pool problem, Congr. Numer., 114
+       (1996), 33­43.
+
+[120] P. R. J. O¨ sterg°ard, Constructing covering codes by tabu search, J.
+       Combin. Designs, 5 (1997), 71­80.
+
+[121] P. R. J. O¨ sterg°ard, New constructions for q-ary covering codes, Ars
+       Combin., 52 (1999), 51­63.
+
+[122] P. R. J. O¨ sterg°ard and U. Blass, On the size of optimal binary codes
+       of length 9 and covering radius 1, IEEE Trans. Inform. Theory, 47
+       (2001), 2556­2557.
+
+[123] P. R. J. O¨ sterg°ard and H. O. H¨ama¨l¨ainen, New upper bounds for bi-
+       nary/ternary mixed covering codes, Helsinki University of Technology,
+       Digital Systems Laboratory, Research Reports, No. 22, (1993), 33 pp.
+
+[124] P. R. J. O¨ sterg°ard and H. O. H¨am¨al¨ainen, A new table of bi-
+       nary/ternary mixed covering codes, Des. Codes Cryptogr., 1 (1997),
+       151­178.
+
+[125] P. R. J. O¨ sterg°ard and M. K. Kaikkonen, New upper bounds for binary
+       covering codes, Discrete Math., 178 (1998), 165­179.
+
+[126] P. R. J. O¨ sterg°ard and O. Pottonen, The perfect binary one-
+       error-correcting codes of length 15: Part I ­ Classification,
+       arXiv:0806.2513v1 [cs.IT] 16 Jun 2008.
+
+                                                 8
+[127] P. R. J. O¨ sterg°ard and A. Wassermann, A new lower bound for the
+       football pool problem for six matches, J. Combin. Theory Ser. A, 99
+       (2002), 175­179.
+
+[128] P. R. J. O¨ sterg°ard and W. D. Weakley, Constructing covering codes
+       with given automorphism, Designs, Codes and Cryptography, 16
+       (1999), 65­73.
+
+[129] P. R. J. O¨ sterg°ard and W. D. Weakley, Classification of binary covering
+       codes, J. Combin. Des., 8 (2000), 391­401.
+
+[130] P. R. J. O¨ sterg°ard and W. D. Weakley, Classifying optimal ternary
+       codes of length 5 and covering radius 1, Beitra¨ge Algebra Geom., 43
+       (2002), 445­449.
+
+[131] E. T. Parker, Orthogonal Latin squares, Proc. Natl. Acad. Sci. USA,
+       45 (1959), 859­862.
+
+[132] A. Plagne, A remark on Haas' method, submitted.
+
+[133] J. Quistorff, On codes with given minimum distance and covering ra-
+       dius, Beitra¨ge Algebra Geom., 42 (2001), 601­611.
+
+[134] J. Quistorff, Improved sphere bounds in finite metric spaces, Bull.
+       Inst. Combin. Appl., 46 (2006), 69­80.
+
+[135] J. Quistorff and J.-C. Schlage-Puchta, On generalized surjective codes,
+       submitted.
+
+[136] A. R´enyi, Foundations of probability, Wiley, New York, 1971.
+
+[137] P. P. Rivas Soriano, QuiniWin
+       http://personal.telefonica.terra.es/web/quiniweb2.
+
+[138] E. R. Rodemich, Coverings by rook domains, J. Combin. Theory, 9
+       (1970), 117­128.
+
+[139] G. Roux, k-propri´et´es dans des tableaux de n colonnes: cas particulier
+       de la k-surjectivit´e et de la k-permutivit´e, Th´ese, Universit´e Paris,
+       France, (1987), 133 pp.
+
+[140] N. J. A. Sloane, Covering arrays and intersecting codes, J. Combin.
+       Designs, 1 (1993), 51­63.
+
+[141] N. J. A. Sloane, The on-line encyclopedia of integer sequences,
+       http://www.research.att.com/njas/sequences.
+
+[142] S. L. Snover, The uniqueness of the Nordstrom­Robinson and the
+       Golay binary codes, PhD thesis, Michigan State University, 1973.
+
+[143] E. Sperner, Ein Satz u¨ber Untermengen einer endlichen Menge, Math.
+       Z., 27 (1928), 544­548.
+
+                                                 9
+[144] R. G. Stanton, Covering theorems in groups (or: How to win at foot-
+       ball pools), Recent Progress in Combinatorics (Proc. 3rd Waterloo
+       Conf. Combinatorics, 1968) (W. T. Tutte, ed.) Academic, New York
+       (1969), 21­36.
+
+[145] R. G. Stanton, J. D. Horton and J. G. Kalbfleisch, Covering theo-
+       rems for vectors with special reference to the case of four and five
+       components, J. London Math. Soc., 1 (1969), 493­499.
+
+[146] R. G. Stanton and J. G. Kalbfleisch, Covering problems for di-
+       chotomized matchings, Aequationes Math., 1 (1968), 94­103.
+
+[147] R. G. Stanton and J. G. Kalbfleisch, Intersection inequalities for the
+       covering problem, SIAM J. Appl. Math., 17 (1969), 1311­1316.
+
+[148] B. Stevens, Transversal covers and packings, PhD thesis, University
+       of Toronto, (1998), 148 pp.
+
+[149] O. Taussky and J. Todd, Covering theorems for groups, Ann. Soc.
+       Polon. Math., 21 (1948), 303­305.
+
+[150] W. D. Weakley, Optimal binary covering codes of length 2j, J. Com-
+       bin. Des., 14 (2006), 1­13.
+
+[151] E. W. Weber, On the football pool problem for 6 matches: A new
+       upper bound, J. Combin. Theory Ser. A 35 (1983), 106­108.
+
+[152] G. J. M. van Wee, Improved sphere bounds on the covering radius of
+       codes, IEEE Trans. Inform. Theory, 34 (1988), 237­245.
+
+[153] G. J. M. van Wee, Bounds on packings and coverings by spheres in q-
+       ary and mixed Hamming spaces, J. Combin. Theory Ser. A, 57 (1991),
+       117­129.
+
+[154] G. J. M. van Wee, Some new lower bounds for binary and ternary
+       covering codes, IEEE Trans. Inform. Theory, 39 (1993), 1422­1424.
+
+[155] L. T. Wille, The football pool problem for 6 matches: a new upper
+       bound obtained by simulated annealing, J. Combin. Theory Ser. A,
+       45 (1987), 171­177.
+
+[156] L. T. Wille, Improved binary code coverings by simulated annealing,
+       Congr. Numer., 73 (1990), 53­58.
+
+[157] L. T. Wille, New binary covering codes obtained by simulated anneal-
+       ing, IEEE Trans. Inform. Theory, 42 (1996), 300­302.
+
+[158] S. K. Zaremba, A covering theorem for Abelian groups, J. London
+       Math. Soc., 26 (1951), 71­72.
+
+[159] S. K. Zaremba, Covering problems concerning Abelian groups, J. Lon-
+       don Math. Soc., 27 (1952), 242­246.
+
+                                                10
+[160] W. Zhang, S. Wang and X. Zhang, Improving embedding efficiency
+       of covering codes for applications in steganography, Communications
+       Letters, IEEE, 11 (2007), 680­682.
+
+[161] Z. Zhang, Linear inequalities for covering codes: Part I ­ Pair covering
+       inequalities, IEEE Trans. Inform. Theory, 37 (1991), 573­582.
+
+[162] Z. Zhang and C. Lo, Linear inequalities for covering codes: Part II ­
+       Triple covering inequalities, IEEE Trans. Inform. Theory, 38 (1992),
+       1648­1662.
+
+                                                11
+

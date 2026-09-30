@@ -1,0 +1,113 @@
+                              Bounds on K3(n, R)
+
+(lower and upper bounds on the size of ternary optimal covering codes)
+
+   n       R=1             R=2         R=3
+
+   1         11
+
+   2         33               11
+
+   3       b 51 b             37       11
+
+   4       h 91 h             31       314
+
+   5       c 2717          w 81 u      33
+
+   6       t 71­73 v       i 15­17 u   d 628 u
+
+   7 j 156­186 v           y 26­34 w   u 11­12 u
+
+   8 j 402­486 v           z 54­81 u   z 14­27 u
+
+   9 e 1060­1269 t e 130­219 m x 27­54 m
+
+   10 k 2854­3645 s y 323­555 i        y 57­105 x
+
+   11 r 7832­9477 n        h 7291 h    x 117­243 u
+
+   12 e 21531­27702 n y 1919­2187 y 282­657 y
+
+   13 h 59049 h            y 5062­6561 x 612­1215 m
+
+   14 r 166610­177147 e 12204­19683 y 1553­2187 m
+
+n R=4              R=5        R=6      R=7 R=8
+
+4     11
+
+5     325             11
+
+6     37              341         11
+
+7     31              314         364  11
+
+8     q9              33          325  395           11
+
+9 u 11­18 m        p6m            37   341           3136
+
+10 m 17­36 m q 9­12 m             31   314           364
+
+11 m 30­81 m m 11­27 m            q9   33            325
+
+12 y 62­175 x y 18­54 m u 10­18 m d 6 m              37
+
+13 y 123­335 z m 33­108 o m 13­36 q q 9­12 m 31
+
+14 e 255­729 m y 59­243 o y 21­81 d u 11­27 m q 9
+
+                           1
+Key to the tables for K3(n, R)
+
+unmarked  Lower bounds
+b         trivial
+c         (Taussky­Todd, 1948)
+d         (Kamps­van Lint, 1967)
+e         (Bhandari­Durairajan, 1996)
+h         (Habsieger, 1996)
+i         perfect code
+j         (Bertolo­O¨ sterg°ard­Weakly, 2004)
+k         (Haas, 2006)
+m         (Haas, 2002)
+p         (Haas­Halupczok­Schlage-Puchta, 2009)
+q         (K´eri­O¨ sterg°ard, 2003)
+r         (K´eri­O¨ sterg°ard, 2003­2006)
+t         (Habsieger­Plagne, 2000)
+u         (Linderoth­Margot­Thain, 2007)
+w         (K´eri, 2008­2009)
+x         (O¨ sterg°ard­Ha¨m¨ala¨inen, 1993)
+y         (Lang­Quistorff­Schneider, 2006)
+z         improved sphere-covering bound
+          (Blass­Litsyn, 1998)
+
+unmarked  Upper bounds
+b
+d         trivial
+h
+i         (Taussky­Todd, 1948)
+m
+n         (Bhandari­Durairajan, 1996)
+o
+q         perfect code
+s         (Bertolo­O¨ sterg°ard­Weakly, 2004)
+t         (O¨ sterg°ard, 1991 and 1992)
+u         (O¨ sterg°ard, 1994)
+v         (O¨ sterg°ard, 1999)
+w         (K´eri­O¨ sterg°ard, 2003­2006)
+x
+y         (Blokhuis­Lam, 1984)
+z         (Di Pasquale­O¨ sterg°ard, 2003)
+
+          (Ha¨m¨ala¨inen­Rankinen, 1991)
+
+          (Laarhoven­Aarts­van Lint­Wille, 1989)
+          (O¨ sterg°ard­Ha¨m¨ala¨inen, 1993)
+
+          (Bertolo­Di Pasquale­Santisi, 2005­2006)
+
+          (Rivas Soriano, 2005,2006,2009)
+
+          (Rivas Soriano, 2011)
+
+                                2
+

@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+sources/gijswijt_polak_2504.01932.pdf
+sources/gp.txt
+sources/*.png

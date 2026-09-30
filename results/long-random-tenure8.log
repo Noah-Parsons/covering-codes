@@ -1,0 +1,49 @@
+﻿K(4,5,2): N=2592 |B|=88 start=random M=56 target=47 seed=12 tenure=8 uncovered=301
+  covered with M=56 after 1209 it, 0.1s -> results\codes\K_4_5_2_M56_seed12.txt
+  covered with M=55 after 1249 it, 0.1s -> results\codes\K_4_5_2_M55_seed12.txt
+  covered with M=54 after 1283 it, 0.1s -> results\codes\K_4_5_2_M54_seed12.txt
+  covered with M=53 after 1388 it, 0.1s -> results\codes\K_4_5_2_M53_seed12.txt
+  covered with M=52 after 1452 it, 0.1s -> results\codes\K_4_5_2_M52_seed12.txt
+  covered with M=51 after 1454 it, 0.1s -> results\codes\K_4_5_2_M51_seed12.txt
+  covered with M=50 after 1775 it, 0.1s -> results\codes\K_4_5_2_M50_seed12.txt
+  covered with M=49 after 1813 it, 0.1s -> results\codes\K_4_5_2_M49_seed12.txt
+  covered with M=48 after 1814 it, 0.1s -> results\codes\K_4_5_2_M48_seed12.txt
+  M=47 it=241814 uncovered=14 best=6 t=15s
+  M=47 it=481814 uncovered=16 best=6 t=31s
+  M=47 it=721814 uncovered=24 best=6 t=46s
+  M=47 it=961814 uncovered=10 best=6 t=62s
+  M=47 it=1201814 uncovered=10 best=6 t=77s
+  M=47 it=1441814 uncovered=15 best=6 t=92s
+  M=47 it=1681814 uncovered=13 best=6 t=108s
+  M=47 it=1901814 uncovered=10 best=6 t=123s
+  M=47 it=2141814 uncovered=14 best=6 t=139s
+  M=47 it=2381814 uncovered=10 best=6 t=154s
+  M=47 it=2641814 uncovered=24 best=6 t=170s
+  M=47 it=2881814 uncovered=10 best=6 t=186s
+  M=47 it=3121814 uncovered=20 best=6 t=203s
+  M=47 it=3361814 uncovered=10 best=6 t=219s
+  M=47 it=3581814 uncovered=19 best=6 t=234s
+  M=47 it=3821814 uncovered=15 best=6 t=250s
+  M=47 it=4061814 uncovered=12 best=6 t=265s
+  M=47 it=4281814 uncovered=15 best=6 t=280s
+  M=47 it=4501814 uncovered=25 best=6 t=296s
+  M=47 it=4721814 uncovered=11 best=6 t=311s
+  M=47 it=4941814 uncovered=27 best=6 t=326s
+  M=47 it=5161814 uncovered=21 best=6 t=341s
+  M=47 it=5401814 uncovered=15 best=6 t=357s
+  M=47 it=5641814 uncovered=19 best=6 t=372s
+  M=47 it=5881814 uncovered=15 best=5 t=388s
+  M=47 it=6121814 uncovered=16 best=5 t=403s
+  M=47 it=6361814 uncovered=20 best=5 t=419s
+  M=47 it=6601814 uncovered=11 best=5 t=435s
+  M=47 it=6841814 uncovered=22 best=5 t=450s
+  M=47 it=7081814 uncovered=11 best=5 t=466s
+  M=47 it=7301814 uncovered=10 best=5 t=481s
+  M=47 it=7521814 uncovered=15 best=5 t=496s
+  M=47 it=7741814 uncovered=11 best=5 t=511s
+  M=47 it=7961814 uncovered=12 best=5 t=526s
+  M=47 it=8201814 uncovered=11 best=5 t=542s
+  M=47 it=8441814 uncovered=12 best=5 t=559s
+  M=47 it=8661814 uncovered=22 best=5 t=574s
+  M=47 it=8881814 uncovered=12 best=5 t=589s
+done: smallest covered M=48, final M=47, best uncovered at final M=5, 9041814 it, 600.3s

@@ -1,0 +1,8 @@
+# K(t=0, b=5, R=1) covering, M=7 seed=1 found by src/search.py
+00000
+00111
+01010
+01100
+10110
+10111
+11001
