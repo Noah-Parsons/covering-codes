@@ -142,6 +142,30 @@ def solve_min(A, sizes, ub, tlim):
     return "timeout", None, bound
 
 
+def solve_min_scip(A, sizes, ub, tlim):
+    """solve_min with SCIP (pip install pyscipopt) instead of HiGHS. On K(1,7,1) it settled
+    classes in seconds that CBC could not settle in 30 minutes."""
+    from pyscipopt import Model, quicksum
+    A = A.tocsr()
+    m = Model()
+    m.hideOutput()
+    xv = [m.addVar(vtype="B") for _ in range(len(sizes))]
+    m.setObjective(quicksum(int(s) * v for s, v in zip(sizes, xv)), "minimize")
+    for i in range(A.shape[0]):
+        m.addCons(quicksum(xv[j] for j in A.indices[A.indptr[i]:A.indptr[i + 1]]) >= 1)
+    m.setParam("limits/time", float(tlim))
+    m.optimize()
+    bound = m.getDualbound()
+    x = None
+    if m.getNSols() > 0:
+        x = np.array([round(m.getVal(v)) for v in xv], dtype=int)
+    if x is not None and int(sizes @ x) <= ub:
+        return "feasible", x, bound
+    if np.ceil(bound - 1e-6) > ub:
+        return "infeasible", None, bound
+    return "timeout", None, bound
+
+
 def solve_cpsat(A, sizes, ub, tlim, workers=4):
     """Same question as solve() with a size cap, answered by OR-tools CP-SAT (integer
     arithmetic throughout, so an independent check on the HiGHS verdicts)."""

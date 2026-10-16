@@ -1,0 +1,9 @@
+K(1,7,1) ub=47 solver=cbc: 46 excluded in first pass, 0 already rechecked, 46 to do
+  p7:t0c0s,b1c0f         orbits=  60 infeasible (0.26s)
+  p5:t0c0s,b1c0f         orbits=  96 infeasible (2.02s)
+  p3:t0c1s,b0c0f         orbits= 128 infeasible (0.05s)
+  p3:t0c1s,b1c0f         orbits= 128 infeasible (3.45s)
+  p3:t0c1s,b2c0f         orbits= 128 infeasible (3.02s)
+  p3:t0c0s,b2c0f         orbits= 144 infeasible (41.15s)
+  p2:t0c0s,b0c1f         orbits= 192 infeasible (12.67s)
+  p2:t0c0s,b0c2f         orbits= 192 infeasible (13.0s)

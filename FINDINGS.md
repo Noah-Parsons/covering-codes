@@ -70,8 +70,28 @@ State when the runs were stopped on 2026-10-13 (they resume from `results/classi
 Recheck (`src/recheck.py`, `results/recheck.jsonl`): rebuilds each excluded class with
 independent code and a random conjugate of the generator. With HiGHS, 11 of the 46 K(1,7,1)
 classes are reconfirmed so far, none contradicted. OR-tools CP-SAT confirmed the 3 easiest and
-timed out at 150 s on the next two, so it is not usable as the second solver; CBC (via PuLP,
-not installed) is the planned one.
+timed out at 150 s on the next two, so it is not usable as the second solver.
+
+CBC second-solver recheck (started 2026-10-15). CBC 2.9 from `pip install pulp[cbc]` (the
+`cbcbox` package). PuLP 4 changed its API completely, so `recheck.py` writes an LP file and
+runs `cbc.exe` directly, minimising with no size cap and comparing the proven optimum with
+47. Positive control first: on two order-2 classes CBC found a 48-word invariant code (the
+record) and proved 48 optimal, matching HiGHS's bound. CBC is roughly 30x slower than HiGHS
+on these problems; a size cutoff of 47.5 made it slower still. Result: 14 of 46 confirmed, 5
+timed out at 30 min, then stopped in favour of SCIP. Logs: `results/logs/`.
+
+**SCIP second-solver recheck, complete (2026-10-15). All 46 K(1,7,1) classes confirmed.**
+SCIP 10.0 (`pip install pyscipopt`), `recheck.py --solver scip`, minimising with no size cap
+on a random conjugate of each generator (seed 2026), rebuilt by `recheck.py`'s own code. Same
+positive control first: with 48 allowed it finds a 48-word invariant code; with 47 it proves
+none exists. Every class: proven optimum or proven lower bound above 47; longest class 626 s.
+So the K(1,7,1) statement now rests on two independent solvers built by different teams (HiGHS
+first pass, SCIP recheck), plus CBC on 14 classes and HiGHS-on-a-conjugate on 11, all agreeing:
+
+> Every covering code of radius 1 in F_3 x F_2^7 with at most 47 words has trivial
+> automorphism group.
+
+Still a floating-point branch-and-bound verdict from each solver, not an exact certificate.
 
 Caveats: "excluded" means HiGHS reported the integer program infeasible. That is a
 floating-point branch-and-bound verdict, not a certified proof; a publishable statement needs
@@ -98,3 +118,50 @@ time limit and are open, not counterexamples. Per-class log: `results/classify.j
 Three different attacks (plain annealing, tabu from the record, exact search under symmetry)
 have all stopped at the table values. The evidence so far is that these bounds are hard to
 improve with laptop-scale search, not that they are neglected.
+
+## Round 5 (2026-10-16): exact attempt at K(1,7,1) = 48 (`src/exact_dist.py`)
+
+Prompted by P. Östergård's reply (2026-10-16): symmetry-exclusion results like round 4 are
+not published unless the problem is of very wide interest; he expects K(1,7,1) = 48, provable
+the way Östergård and Blass proved K(9,1) = 62 (IEEE Trans. Inform. Theory 47, 2001).
+
+Method: their codeword-distribution refinement adapted to one ternary coordinate (fix the
+ternary coordinate, then binary coordinates one at a time; cell inequality
+(1+f) M_x + sum over neighbouring cells M_y >= 2^f; dedupe under S_3 x hyperoctahedral group),
+then exact completion of each surviving distribution with CP-SAT. Integer arithmetic only.
+
+Validation (all correct, codes confirmed by `src/checker.py`):
+K(1,4,1): no code at 7, code at 8. K(1,5,1): none at 15, code at 16. K(1,6,1): none at 23,
+code at 24. Each in under 10 s.
+
+K(1,7,1), M = 47 (measured, not run to the end):
+
+| level | inequivalent distributions | exact completion of a sample |
+|---|---|---|
+| 0 | 16 | |
+| 1 | 429 | |
+| 2 | 21,396 | 8 of 8 timed out at 40 s |
+| 3 | ~15 million raw (sampled; a few million after dedupe) | 10 of 15 infeasible in 0.04-14 s, 5 timed out at 20 s |
+| 4 | splitting 20 level-3 cases did not finish in ~8 min | not measured |
+
+Estimate: months of CPU time on this laptop at level 3; level 4 multiplies the count faster
+than it eases each case. Not feasible here without a new idea (much stronger pruning than the
+cell inequality) or the full orderly-generation engineering of the 2001 paper plus far more
+compute. Stopped before any long run.
+
+## Round 6 (2026-10-16): new lower-bound ideas, and a bridge to rainbow domination
+
+- Column observation: a codeword covers all 3 words of its column, so K(1,b,1) is the
+  3-rainbow domination number of Q_b (Brešar–Henning–Rall 2008: gamma_rk(G) = gamma(G □ K_k)).
+- Colour-blind relaxation (g(v) in 0..3, empty column needs neighbour total >= 3): exact for
+  b = 4, 6 but 14 < 16 for b = 5, and has a weight-47 solution for b = 7 (not colourable). Too weak.
+- Symmetry-reduced level-1 SDP / Lovász–Schrijver bound (16 pair classes): 39.10 for K(1,7,1),
+  below the known 42. (A first version with a sign error gave invalid bounds above known values;
+  caught by validating on b = 3..6.) The strong Gijswijt–Polak hierarchy, not yet done for mixed
+  codes, would be a major project.
+- Bridge confirmed by direct computation (`src/rainbow.py`, graph definition, SCIP):
+  gamma_r2(Q_n) = 2, 2, 4, 7, 12, 16 for n = 1..6 (= K(n+1,1)) and
+  gamma_r3(Q_n) = 2, 3, 6, 8, 16 for n = 1..5 (= K(1,n,1)). No published hypercube values of
+  rainbow domination were found (web search, 2026-10-16), so the coding tables give values that
+  literature lacks: gamma_r2(Q_n) exact for n <= 8 (gamma_r2(Q_8) = K(9,1) = 62), gamma_r3(Q_n)
+  exact for n <= 6 (gamma_r3(Q_6) = 24), 42 <= gamma_r3(Q_7) <= 48.

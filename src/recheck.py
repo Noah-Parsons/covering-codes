@@ -9,7 +9,7 @@ of each class. Differences from the first pass, on purpose:
   * the generator g is replaced by a random conjugate h g h^-1 (seeded), so a different
     but equivalent instance is solved;
   * the solver is selectable: OR-tools CP-SAT (integer arithmetic, capped feasibility),
-    CBC through PuLP (a second LP-based solver), or HiGHS again.
+    CBC (a second LP-based solver, run as a program on an LP file), or HiGHS again.
 
 Output: results/recheck.jsonl, one row per class and solver. Decided rows are skipped on rerun.
 """
@@ -81,17 +81,42 @@ def solve_cpsat(sizes, rows, ub, tlim, workers):
             cp_model.FEASIBLE: "feasible"}.get(st, "timeout"), None
 
 
-def solve_cbc(sizes, rows, ub, tlim, workers):
-    import pulp
-    prob = pulp.LpProblem("cover", pulp.LpMinimize)
-    x = [pulp.LpVariable(f"x{j}", cat="Binary") for j in range(len(sizes))]
-    prob += pulp.lpSum(s * v for s, v in zip(sizes, x))
-    for r in rows:
-        prob += pulp.lpSum(x[j] for j in r) >= 1
-    prob.solve(pulp.PULP_CBC_CMD(msg=False, timeLimit=tlim, threads=workers))
-    if pulp.LpStatus[prob.status] != "Optimal" or prob.sol_status != pulp.LpSolutionOptimal:
-        return "timeout", None
-    opt = round(pulp.value(prob.objective))
+def solve_cbc(sizes, rows, ub, tlim, workers, cutoff=False):
+    # CBC is run as a program on a plain LP file (CBC from the cbcbox package, which is what
+    # `pip install pulp[cbc]` brings). PuLP 4 itself is not used: its API changed completely,
+    # and calling CBC directly keeps one less layer between the model and the second solver.
+    #
+    # By default CBC minimises outright and reports the proven optimum, which can be compared
+    # with HiGHS's. cutoff=True instead discards every branch that cannot reach a size <= ub
+    # (cutoff ub + 0.5; sizes are integers). On two K(1,7,1) classes that was slower (80 s
+    # against 28 s, and 300 s+ against 226 s), so it is not the default.
+    import subprocess
+    import tempfile
+    import cbcbox
+    with tempfile.TemporaryDirectory() as d:
+        lp, sol = os.path.join(d, "cover.lp"), os.path.join(d, "cover.sol")
+        with open(lp, "w") as f:
+            terms = [f"{s} x{j}" for j, s in enumerate(sizes)]      # 10 terms a line: short lines
+            f.write("Minimize\n obj: " + "\n + ".join(" + ".join(terms[i:i + 10])
+                                                      for i in range(0, len(terms), 10)) + "\n")
+            f.write("Subject To\n")
+            for i, r in enumerate(rows):
+                f.write(f" c{i}: " + " + ".join(f"x{j}" for j in r) + " >= 1\n")
+            f.write("Binary\n " + " ".join(f"x{j}" for j in range(len(sizes))) + "\nEnd\n")
+        cmd = [cbcbox.cbc_bin_path(), lp, "-sec", str(tlim), "-threads", str(workers)]
+        if cutoff:
+            cmd += ["-cutoff", str(ub + 0.5)]
+        subprocess.run(cmd + ["-solve", "-solution", sol], capture_output=True, check=False)
+        if not os.path.exists(sol):
+            return "timeout", None
+        with open(sol) as f:
+            head = f.readline()
+    if cutoff and (head.startswith("Infeasible") or head.startswith("Integer infeasible")):
+        return "infeasible", "cutoff"
+    # "Optimal - objective value 48.00000000" only when CBC proved optimality.
+    if not head.startswith("Optimal"):
+        return "timeout", head.strip()
+    opt = round(float(head.rsplit(None, 1)[-1]))
     return ("infeasible" if opt > ub else "feasible"), opt
 
 
@@ -112,7 +137,30 @@ def solve_highs(sizes, rows, ub, tlim, workers):
     return "timeout", bound
 
 
-SOLVERS = {"cpsat": solve_cpsat, "cbc": solve_cbc, "highs": solve_highs}
+def solve_scip(sizes, rows, ub, tlim, workers):
+    # SCIP (pip install pyscipopt): minimise, as with HiGHS. If time runs out, a proven lower
+    # bound above ub still settles the class. SCIP's search is single-threaded; workers unused.
+    from pyscipopt import Model, quicksum
+    m = Model()
+    m.hideOutput()
+    x = [m.addVar(vtype="B", name=f"x{j}") for j in range(len(sizes))]
+    m.setObjective(quicksum(s * v for s, v in zip(sizes, x)), "minimize")
+    for r in rows:
+        m.addCons(quicksum(x[j] for j in r) >= 1)
+    m.setParam("limits/time", tlim)
+    m.optimize()
+    status, bound = m.getStatus(), m.getDualbound()
+    if status == "optimal":
+        opt = round(m.getObjVal())
+        return ("infeasible" if opt > ub else "feasible"), opt
+    if m.getNSols() > 0 and round(m.getObjVal()) <= ub:
+        return "feasible", round(m.getObjVal())
+    if math.ceil(bound - 1e-6) > ub:
+        return "infeasible", bound
+    return "timeout", bound
+
+
+SOLVERS = {"cpsat": solve_cpsat, "cbc": solve_cbc, "highs": solve_highs, "scip": solve_scip}
 
 
 def main():
@@ -126,7 +174,9 @@ def main():
     ap.add_argument("--time", type=float, default=3600.0)
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--seed", type=int, default=2026)
-    ap.add_argument("--only", default="", help="comma list of class names")
+    ap.add_argument("--only", default="", help="semicolon list of class names (the names contain commas)")
+    ap.add_argument("--out", default="recheck.jsonl",
+                    help="results file under results/ (one per parallel worker, merged afterwards)")
     a = ap.parse_args()
 
     name, ub = f"K({a.t},{a.b},{a.R})", a.record - 1
@@ -136,7 +186,7 @@ def main():
             r = json.loads(ln)
             if r["target"] == name and r["ub"] == ub and r["status"] == "infeasible":
                 first[r["class"]] = r
-    out_path = os.path.join(ROOT, "results", "recheck.jsonl")
+    out_path = os.path.join(ROOT, "results", a.out)
     done = set()
     if os.path.exists(out_path):
         with open(out_path) as f:
@@ -144,7 +194,7 @@ def main():
                 r = json.loads(ln)
                 if r["target"] == name and r["ub"] == ub and r["solver"] == a.solver and r["status"] != "timeout":
                     done.add(r["class"])
-    todo = sorted((c for c in first if c not in done and (not a.only or c in a.only.split(","))),
+    todo = sorted((c for c in first if c not in done and (not a.only or c in a.only.split(";"))),
                   key=lambda c: first[c]["orbits"])
     print(f"{name} ub={ub} solver={a.solver}: {len(first)} excluded in first pass, "
           f"{len(done)} already rechecked, {len(todo)} to do", flush=True)

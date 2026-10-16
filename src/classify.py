@@ -31,7 +31,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 from orbit_ilp import (closure, gen_perm, orbit_problem, orbits, solve,  # noqa: E402
-                       solve_cpsat, solve_min, verify_and_save)
+                       solve_cpsat, solve_min, solve_min_scip, verify_and_save)
 from search import all_digits, build_balls  # noqa: E402
 
 
@@ -83,7 +83,7 @@ def main():
     ap.add_argument("--tlim", type=float, default=30.0, help="solver seconds per class")
     ap.add_argument("--time", type=float, default=170.0, help="total wall seconds")
     ap.add_argument("--max-orbits", type=int, default=10 ** 9, help="skip classes with more orbits")
-    ap.add_argument("--solver", choices=["highs", "cpsat", "highs-min"], default="highs-min")
+    ap.add_argument("--solver", choices=["highs", "cpsat", "highs-min", "scip-min"], default="highs-min")
     ap.add_argument("--workers", type=int, default=4, help="CP-SAT threads")
     ap.add_argument("--recheck", action="store_true",
                     help="re-solve classes that only the OTHER solver has decided")
@@ -135,6 +135,8 @@ def main():
         bound = None
         if a.solver == "highs-min":
             status, x, bound = solve_min(A, sizes, ub, a.tlim)
+        elif a.solver == "scip-min":
+            status, x, bound = solve_min_scip(A, sizes, ub, a.tlim)
         elif a.solver == "cpsat":
             status, x = solve_cpsat(A, sizes, ub, a.tlim, a.workers)
         else:

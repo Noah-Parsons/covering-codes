@@ -1,0 +1,3 @@
+K(1,7,1) ub=47 solver=cbc: 46 excluded in first pass, 0 already rechecked, 7 to do
+  p2:t0c0s,b1c2f         orbits= 192 infeasible (109.93s)
+  p2:t0c0s,b0c4f         orbits= 192 timeout    (1800.31s)   <-- does NOT confirm

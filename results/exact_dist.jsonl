@@ -1,0 +1,4 @@
+{"b": 4, "M": 8, "leaf": 3, "leaves": 2, "verdict": "CODE EXISTS", "seconds": 0.1}
+{"b": 5, "M": 15, "leaf": 3, "leaves": 79, "verdict": "no code", "seconds": 0.9}
+{"b": 5, "M": 16, "leaf": 3, "leaves": 1731, "verdict": "CODE EXISTS", "seconds": 9.9}
+{"b": 6, "M": 24, "leaf": 3, "leaves": 6, "verdict": "CODE EXISTS", "seconds": 0.2}

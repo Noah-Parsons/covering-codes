@@ -1,0 +1,272 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,longtable}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Sp}{\mathcal{S}}
+\newcommand{\Aut}{\operatorname{Aut}}
+
+\title{Improving the covering code bound $K(1,7,1)\le 48$\\ requires an asymmetric code}
+\author{Noah Parsons\\ \small Independent researcher\thanks{%
+\texttt{parsons.m.noah@gmail.com}, ORCID \href{https://orcid.org/0009-0000-7224-6040}{0009-0000-7224-6040}.}}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $K(1,7,1)$ be the smallest number of words in a covering code of radius $1$ in the mixed
+Hamming space $\F_3\times\F_2^7$. The tables of mixed binary/ternary covering codes give
+$42\le K(1,7,1)\le 48$, and the upper bound comes from the direct product of $\F_3$ with the
+binary Hamming code of length $7$. We prove, with the help of a computer, that every covering
+code of radius $1$ in this space with at most $47$ words has trivial automorphism group.
+The proof reduces the question to one representative of each of the $46$ conjugacy classes of
+isometries of prime order and solves an integer program for each; the minimum size of an
+invariant covering code turns out to be $48$, $54$ or $56$ in every case. Two independent
+integer-programming solvers agree on all $46$ cases.
+\end{abstract}
+
+\section{Introduction}
+
+A \emph{covering code} of radius $R$ in a Hamming space is a set of words such that every word
+of the space is within Hamming distance $R$ of at least one of them. For mixed spaces
+$\F_3^t\times\F_2^b$ the smallest possible size is denoted $K(t,b,R)$; bounds are collected in
+tables maintained by K\'eri~\cite{keri}, following
+\cite{ostergard-hamalainen-1997,bertolo-ostergard-weakley-2004}, and the general theory is in the
+monograph~\cite{cohen-book}.
+
+This note concerns the entry $K(1,7,1)$, for which the tables give
+\begin{equation}\label{eq:bounds}
+42 \le K(1,7,1) \le 48 .
+\end{equation}
+The lower bound is due to Lang, Quistorff and Schneider~\cite{lqs-2007}. The upper bound is the
+elementary construction $K(t,b,R)\le 3K(t-1,b,R)$: if $H\subseteq\F_2^7$ is the Hamming code,
+which has $16$ words and covering radius $1$, then $\F_3\times H$ has $48$ words and covering
+radius $1$. This code is highly symmetric.
+
+A standard way to look for good codes is to prescribe a group of symmetries and search only
+among codes it leaves invariant; Östergård and Weakley used this to construct covering
+codes~\cite{ostergard-weakley-1999}. Here the same idea is used in the opposite direction: to
+show that a code improving the upper bound in~\eqref{eq:bounds} cannot have any symmetry at all.
+
+\begin{theorem}\label{thm:main}
+Let $C\subseteq\F_3\times\F_2^7$ be a covering code of radius $1$ with $|C|\le 47$. Then the
+only isometry of $\F_3\times\F_2^7$ that maps $C$ onto itself is the identity.
+\end{theorem}
+
+The proof is computer-assisted (Section~\ref{sec:computation}). It also determines, for each
+type of symmetry of prime order, the smallest covering code having that symmetry
+(Table~\ref{tab:classes}).
+
+% TODO(Noah): before submitting, read [ostergard-hamalainen-1997] and
+% [bertolo-ostergard-weakley-2004] in full and check that neither already states Theorem 1.
+
+\section{Preliminaries}
+
+Write $\Sp=\F_3\times\F_2^7$; it has $3\cdot 2^7=384$ words. The Hamming distance $d(x,y)$ is the
+number of coordinates in which $x$ and $y$ differ, and $B(x)=\{y\in\Sp: d(x,y)\le 1\}$. Each
+ball has $1+2+7=10$ words.
+
+\begin{definition}
+An \emph{isometry} of $\Sp$ is a bijection $\Sp\to\Sp$ that preserves $d$. The isometries form a
+group $G$. For a code $C\subseteq\Sp$, its \emph{automorphism group} is
+$\Aut(C)=\{g\in G: g(C)=C\}$.
+\end{definition}
+
+The isometries of a Hamming space are exactly the maps that permute coordinates carrying
+alphabets of the same size and apply a permutation of the alphabet in each
+coordinate~\cite{cohen-book}. Here the ternary coordinate cannot be moved, so
+\[
+G \;\cong\; S_3 \times \bigl(S_2 \wr S_7\bigr),
+\qquad |G| = 6\cdot 2^7\cdot 7! = 3\,870\,720 .
+\]
+An element of $S_2\wr S_7$ is a pair $(f,\sigma)$: a permutation $\sigma$ of the seven binary
+coordinates followed by flipping the coordinates in a set $f$.
+
+\section{Reduction to finitely many integer programs}
+
+\begin{lemma}\label{lem:conj}
+If $C$ is a covering code of radius $1$ and $h\in G$, then $h(C)$ is a covering code of radius
+$1$ with $|h(C)|=|C|$, and $\Aut(h(C)) = h\,\Aut(C)\,h^{-1}$.
+\end{lemma}
+
+\begin{proof}
+Since $h$ is a bijection preserving distance, $h(B(c))=B(h(c))$, so the balls around $h(C)$ are
+the images of the balls around $C$ and still cover $\Sp$. Further, $g(C)=C$ if and only if
+$(hgh^{-1})(h(C))=h(C)$.
+\end{proof}
+
+\begin{lemma}\label{lem:prime}
+To prove Theorem~\ref{thm:main} it suffices to show: for one representative $r$ of each
+conjugacy class of elements of prime order in $G$, no covering code $C$ of radius $1$ with
+$|C|\le 47$ satisfies $r(C)=C$.
+\end{lemma}
+
+\begin{proof}
+Suppose $|C|\le 47$ and $\Aut(C)$ contains some $g_0\neq\mathrm{id}$. Since $G$ is finite, $g_0$
+has some order $n>1$. Choose a prime $p$ dividing $n$; then $g=g_0^{\,n/p}$ has order exactly
+$p$, and $g\in\Aut(C)$ because every power of an automorphism is an automorphism.
+Let $r=hgh^{-1}$ be the chosen representative
+of the conjugacy class of $g$. By Lemma~\ref{lem:conj}, $h(C)$ is a covering code of the same
+size and $r\in\Aut(h(C))$, contradicting the assumption.
+\end{proof}
+
+\begin{lemma}\label{lem:classes}
+The elements of prime order in $G$ fall into exactly $46$ conjugacy classes: $39$ of order $2$,
+$5$ of order $3$, one of order $5$ and one of order $7$. Representatives are $(\alpha,(f,\sigma))$
+where
+\begin{itemize}
+\item $p=2$: $\alpha$ is the identity or a transposition of $\F_3$; $\sigma$ is a product of
+  $c\in\{0,1,2,3\}$ disjoint transpositions; $f$ flips $k$ of the $7-2c$ coordinates fixed by
+  $\sigma$, where $0\le k\le 7-2c$; and not all of $\alpha,c,k$ are trivial;
+\item $p=3$: $\alpha$ is the identity or the $3$-cycle $x\mapsto x+1$; $\sigma$ is a product of
+  $c\in\{0,1,2\}$ disjoint $3$-cycles; $f=\emptyset$; and not both $\alpha$ and $c$ are trivial;
+\item $p=5$: $\alpha=\mathrm{id}$, $\sigma$ a $5$-cycle, $f=\emptyset$;
+\item $p=7$: $\alpha=\mathrm{id}$, $\sigma$ a $7$-cycle, $f=\emptyset$.
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+An element $(\alpha,\beta)$ of the direct product has prime order $p$ exactly when
+$\alpha^p=1$, $\beta^p=1$ and they are not both the identity, and it is conjugate to
+$(\alpha',\beta')$ exactly when $\alpha$ is conjugate to $\alpha'$ in $S_3$ and $\beta$ to
+$\beta'$ in $S_2\wr S_7$. In $S_3$ the classes are the identity, the transpositions and the
+$3$-cycles.
+
+Conjugacy classes in $S_2\wr S_7$ are determined by the cycle type of $\sigma$ together with,
+for each cycle, the parity of the number of flipped coordinates on it~\cite[Ch.~4]{james-kerber}.
+If $\beta=(f,\sigma)$ has $\beta^p=1$ then $\sigma^p=1$, so every cycle of $\sigma$ has length $1$
+or $p$. On a cycle of length $p$, $\beta^p$ flips each coordinate of the cycle once for every
+flip on the cycle, so the parity must be even; such a cycle is conjugate to one with no flips. On
+a fixed coordinate a flip has order $2$, so flipped fixed coordinates occur only when $p=2$.
+This gives the representatives listed, and counting them gives
+$2\cdot(8+6+4+2)-1=39$ classes of order $2$, $3+2=5$ of order $3$, and one each of orders $5$
+and $7$. As an independent check, the program computes the same counts by brute-force
+enumeration of the whole group on five smaller spaces (\texttt{tests/test\_classify.py}).
+\end{proof}
+
+\paragraph{The integer program.} Fix a representative $r$, and let $O_1,\dots,O_m$ be the orbits
+of the cyclic group $\langle r\rangle$ on $\Sp$, with representatives $w_i\in O_i$. A code is
+$r$-invariant exactly when it is a union of orbits. If $C$ is $r$-invariant then a word $w$ is
+covered if and only if $r(w)$ is, because $r$ is an isometry; so it suffices to check coverage
+at $w_1,\dots,w_m$. Hence the smallest $r$-invariant covering code has size
+\begin{equation}\label{eq:ilp}
+m(r) \;=\; \min\Bigl\{ \sum_{j=1}^m |O_j|\,y_j \;:\;
+\sum_{j:\,O_j\cap B(w_i)\neq\emptyset} y_j \ge 1 \ (1\le i\le m),\ y\in\{0,1\}^m \Bigr\}.
+\end{equation}
+By Lemmas~\ref{lem:prime} and~\ref{lem:classes}, Theorem~\ref{thm:main} is equivalent to
+$m(r)\ge 48$ for all $46$ representatives.
+
+\section{Computation}\label{sec:computation}
+
+The programs~\eqref{eq:ilp} have between $60$ and $288$ variables. They were solved twice, by
+separately written code:
+\begin{enumerate}
+\item \textbf{First pass.} \texttt{src/classify.py} builds each program from the class
+  representative and solves it with HiGHS (through SciPy~1.16.3), either minimising and reading
+  the proven lower bound or adding the constraint $\sum|O_j|y_j\le 47$ and obtaining
+  infeasibility. All $46$ classes were excluded; total solver time $2655$\,s.
+\item \textbf{Second pass.} \texttt{src/recheck.py}, which shares no code with the first pass,
+  replaces each representative $r$ by a random conjugate $hrh^{-1}$ (seed $2026$), rebuilds the
+  orbits and the program from scratch, and minimises~\eqref{eq:ilp} with SCIP~10.0
+  through PySCIPOpt~6.3.0. SCIP proved an optimal value $m(r)\in\{48,54,56\}$ in all $46$ cases;
+  total solver time $1715$\,s on one core of an Intel Core Ultra~7 255HX.
+\end{enumerate}
+Before the second pass, the method was tested on a case with a known answer: for two classes
+of order $2$, allowing $48$ words, SCIP produced an invariant covering code of size $48$, and an
+independent brute-force checker (\texttt{src/checker.py}) confirms that both codes cover all
+$384$ words (\texttt{results/codes/K\_1\_7\_1\_M48\_scip\_*.txt}). Partial runs with two
+further solvers, CBC on $14$ classes and HiGHS on a random conjugate for $11$, agree as well.
+Table~\ref{tab:classes} lists every class with both results.
+
+\begin{remark}
+Both solvers work in floating-point arithmetic, so their verdicts are strong evidence rather
+than certificates of the kind an exact verifier would produce. Two solvers written by different
+teams, applied to independently built instances, agree on every case.
+\end{remark}
+
+\section{Discussion}
+
+For many classes $m(r)=48$: the record $48$ can be reached by codes with many different
+symmetries, but not one of them can be shrunk while keeping its symmetry. Theorem~\ref{thm:main}
+therefore says that a search for a $47$-word code can ignore all symmetric codes, which is where
+searches usually start. Whether $K(1,7,1)=48$ remains open; deciding it requires handling the
+asymmetric codes, for which the reduction above gives no help.
+
+\paragraph{Code and data.} All programs, logs and the generator of Table~\ref{tab:classes} are at
+\url{https://github.com/Noah-Parsons/covering-codes}.
+
+\begin{thebibliography}{9}
+
+\bibitem{bertolo-ostergard-weakley-2004}
+R.~Bertolo, P.~R.~J. Östergård and W.~D. Weakley,
+An updated table of binary/ternary mixed covering codes,
+\emph{J. Combin. Des.} 12 (2004), 157--176.
+
+\bibitem{cohen-book}
+G.~Cohen, I.~Honkala, S.~Litsyn and A.~Lobstein,
+\emph{Covering Codes}, North-Holland, Amsterdam, 1997.
+
+\bibitem{james-kerber}
+G.~James and A.~Kerber,
+\emph{The Representation Theory of the Symmetric Group},
+Addison-Wesley, Reading, MA, 1981.
+
+\bibitem{keri}
+G.~Kéri, Tables for bounds on covering codes,
+\url{https://old.sztaki.hu/~keri/codes/index.htm} (accessed 29 September 2026).
+
+\bibitem{lqs-2007}
+W.~Lang, J.~Quistorff and E.~Schneider,
+New results on integer programming for codes,
+\emph{Congr. Numer.} 188 (2007), 97--107.
+
+\bibitem{ostergard-hamalainen-1997}
+P.~R.~J. Östergård and H.~O. Hämäläinen,
+A new table of binary/ternary mixed covering codes,
+\emph{Des. Codes Cryptogr.} 11 (1997), 151--178.
+
+\bibitem{ostergard-weakley-1999}
+P.~R.~J. Östergård and W.~D. Weakley,
+Constructing covering codes with given automorphisms,
+\emph{Des. Codes Cryptogr.} 16 (1999), 65--73.
+
+\end{thebibliography}
+
+\clearpage
+\appendix
+\section{The 46 classes}
+
+\begin{center}
+\small
+\begin{longtable}{rrcrrrrrrr}
+\caption{One row per conjugacy class of prime-order isometries. $\alpha$: map on the ternary
+coordinate; $c$: number of $p$-cycles on binary coordinates; $k$: flipped fixed binary
+coordinates; orbits: number of variables in~\eqref{eq:ilp}. HiGHS: proven lower bound when the
+first pass minimised (``--'' where it proved the capped program infeasible). SCIP: proven
+optimum $m(r)$ on a random conjugate. Times in seconds.}\label{tab:classes}\\
+\toprule
+\# & $p$ & $\alpha$ & $c$ & $k$ & orbits & HiGHS & time & SCIP $m(r)$ & time \\
+\midrule
+\endfirsthead
+\toprule
+\# & $p$ & $\alpha$ & $c$ & $k$ & orbits & HiGHS & time & SCIP $m(r)$ & time \\
+\midrule
+\endhead
+\input{table_1_7_1.tex}
+\end{longtable}
+\end{center}
+
+\end{document}

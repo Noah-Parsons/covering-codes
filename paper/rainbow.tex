@@ -1,0 +1,235 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\gr}{\gamma_{r}}
+
+\title{Rainbow domination numbers of hypercubes\\ from covering-code tables}
+\author{Noah Parsons\\ \small Independent researcher\thanks{%
+\texttt{parsons.m.noah@gmail.com}, ORCID \href{https://orcid.org/0009-0000-7224-6040}{0009-0000-7224-6040}.}}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The $k$-rainbow domination number $\gamma_{rk}(G)$ has been determined for many families of
+graphs, such as grids, products of cycles and generalized Petersen graphs; we are not aware of
+values for hypercubes. We point out that, by a theorem of Brešar, Henning and Rall,
+$\gamma_{r3}(Q_n)$ is the size of an optimal mixed covering code with one ternary and $n$ binary
+coordinates and radius $1$, and, as an immediate observation, $\gamma_{r2}(Q_n)$ is the size of
+an optimal binary covering code of length $n+1$ and radius $1$. Both are tabulated in coding
+theory. This gives the exact
+values $\gamma_{r2}(Q_n)$ for $n\le 8$ and $\gamma_{r3}(Q_n)$ for $n\le 6$, and bounds beyond,
+which we confirm independently for small $n$ by solving the rainbow domination problem directly.
+For the first open case, $42\le\gamma_{r3}(Q_7)\le 48$, we show by computer that every
+$3$-rainbow dominating function of $Q_7$ with weight at most $47$ has no non-trivial symmetry.
+\end{abstract}
+
+\section{Introduction}
+
+Let $G$ be a graph and $k\ge 1$. A \emph{$k$-rainbow dominating function} is a map
+$f\colon V(G)\to 2^{\{1,\dots,k\}}$ such that every vertex $v$ with $f(v)=\emptyset$ satisfies
+$\bigcup_{u\in N(v)} f(u)=\{1,\dots,k\}$. Its weight is $w(f)=\sum_v |f(v)|$, and the
+\emph{$k$-rainbow domination number} $\gamma_{rk}(G)$ is the minimum weight. The notion was
+introduced by Brešar, Henning and Rall~\cite{bhr}; for $k=1$ it is ordinary domination. Exact
+values are known for several families, for example
+$P_3\,\square\,P_n$~\cite{p3pn}, $C_n\,\square\,C_m$ for small $n$~\cite{cncm,c3cm}, and
+generalized Petersen graphs~\cite{petersen}. We are not aware of values for hypercubes.
+
+The hypercube $Q_n$ has vertex set $\F_2^n$, with two vertices adjacent when they differ in one
+coordinate. Its ordinary domination number $\gamma(Q_n)$ is the minimum size $K(n,1)$ of a binary
+code of length $n$ and covering radius~$1$, a classical problem in coding
+theory~\cite{cohen-book}; $\gamma(Q_9)=62$ was settled by Östergård and Blass~\cite{ob}. Domination
+in hypercubes is surveyed in~\cite{hhh}. Closest to the present note, Azarija, Henning and
+Klavžar~\cite{ahk} use the fact that $Q_{n+1}$ is the prism $Q_n\,\square\,K_2$ to prove
+$\gamma_t(Q_{n+1})=2\gamma(Q_n)$ and several further domination-type identities for hypercubes.
+The point of this note is that the rainbow domination numbers of hypercubes are also already in
+the coding tables.
+% TODO(Noah): read the survey chapter [hhh] (Haynes, Hedetniemi, Henning 2023) before submitting,
+% to check that it does not already list rainbow domination numbers of hypercubes.
+
+\section{Rainbow domination of $Q_n$ as covering codes}
+
+Brešar, Henning and Rall proved that $\gamma_{rk}(G)=\gamma(G\,\square\,K_k)$ for every graph
+$G$~\cite{bhr}. For hypercubes we give the correspondence explicitly, since it is what the
+symmetry result of Section~\ref{sec:sym} uses.
+
+Write $K(t,b,1)$ for the minimum size of a code in $\F_3^t\times\F_2^b$ in which every word is
+within Hamming distance $1$ of a codeword~\cite{bow,oh}. For $k=3$, identify a code
+$C\subseteq\F_3\times\F_2^n$ with the map
+\[
+f_C(v)=\{a\in\F_3 : (a,v)\in C\},\qquad v\in\F_2^n,
+\]
+so that $|C|=w(f_C)$, and every map $f\colon\F_2^n\to 2^{\F_3}$ arises from exactly one code.
+
+\begin{proposition}\label{prop:bridge}
+$C$ has covering radius $1$ if and only if $f_C$ is a $3$-rainbow dominating function of $Q_n$.
+Hence $\gamma_{r3}(Q_n)=K(1,n,1)$.
+\end{proposition}
+
+\begin{proof}
+Call $\{(0,v),(1,v),(2,v)\}$ the \emph{column} of $v$. Changing the ternary coordinate is one
+step, so a codeword in a column covers all three words of that column. Thus if
+$f_C(v)\neq\emptyset$, the column of $v$ is covered. If $f_C(v)=\emptyset$, the word $(a,v)$ can
+only be covered by a codeword $(a,u)$ with $u$ adjacent to $v$, that is, by some $u\in N(v)$ with
+$a\in f_C(u)$. So all three words of the column are covered exactly when
+$\bigcup_{u\in N(v)}f_C(u)=\F_3$, which is the rainbow condition at $v$.
+\end{proof}
+
+For $k=2$ there is nothing to prove beyond the known identity.
+
+\begin{remark}[Observation]
+By the case $k=2$ of~\cite{bhr}, $\gamma_{r2}(Q_n)=\gamma(Q_n\,\square\,K_2)$, and
+$Q_n\,\square\,K_2=Q_{n+1}$. Hence $\gamma_{r2}(Q_n)=\gamma(Q_{n+1})=K(n+1,1)$. This follows at
+once from~\cite{bhr} and the prism structure used in~\cite{ahk}; we record it only because the
+resulting values do not seem to have been listed.
+\end{remark}
+
+\section{Values}
+
+Table~\ref{tab:values} lists the values that follow from the tables of K\'eri~\cite{keri},
+which collect results from~\cite{bow,oh,ob,lqs} and many other sources. Entries for larger $n$
+are bounds as recorded there; later work on lower bounds for $\gamma(Q_n)$, such
+as~\cite{wu-chen,gp}, may improve some of them.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rcccccccccccc}
+\toprule
+$n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+\midrule
+$\gamma_{r2}(Q_n)$ & 2 & 2 & 4 & 7 & 12 & 16 & 32 & 62 & 107--120 & 180--192 & 342--380 & \\
+$\gamma_{r3}(Q_n)$ & 2 & 3 & 6 & 8 & 16 & 24 & 42--48 & 76--84 & 134--160 & 253--284 & 448--548 & 869--992\\
+\bottomrule
+\end{tabular}
+\caption{Rainbow domination numbers of hypercubes, read from the covering-code tables
+($\gamma_{r2}(Q_n)=K(n+1,1)$, $\gamma_{r3}(Q_n)=K(1,n,1)$).}\label{tab:values}
+\end{table}
+
+\paragraph{Independent check.} To guard against errors in the translation, we computed the rainbow
+domination numbers directly from the graph-theoretic definition, as integer programs solved to
+optimality with SCIP~10.0 (\texttt{src/rainbow.py}). The results,
+$\gamma_{r2}(Q_n)=2,2,4,7,12,16$ for $n=1,\dots,6$ and $\gamma_{r3}(Q_n)=2,3,6,8,16$ for
+$n=1,\dots,5$, agree with Table~\ref{tab:values}.
+
+\section{The first open case: symmetry}\label{sec:sym}
+
+The smallest open value is $42\le\gamma_{r3}(Q_7)\le 48$. The upper bound is attained by giving
+every vertex of the binary Hamming code of length $7$ all three colours: $16\cdot 3=48$. This
+function is highly symmetric.
+
+The symmetries of the problem are the maps $f\mapsto f^{g}$ with
+$f^{g}(v)=\pi\bigl(f(\sigma^{-1}v)\bigr)$, where $\sigma\in\operatorname{Aut}(Q_7)$ and $\pi$ is a
+permutation of the three colours. They form the group $\operatorname{Aut}(Q_7)\times S_3$ of
+order $2^7\cdot 7!\cdot 6=3\,870\,720$. Under the correspondence $C\leftrightarrow f_C$, this is
+exactly the isometry group of $\F_3\times\F_2^7$, so symmetries of codes and of rainbow functions
+match.
+
+\begin{theorem}\label{thm:sym}
+Every $3$-rainbow dominating function of $Q_7$ with weight at most $47$ has trivial stabiliser in
+$\operatorname{Aut}(Q_7)\times S_3$.
+\end{theorem}
+
+\begin{proof}[Method]
+If the stabiliser of $f$ is non-trivial, it contains an element $g$ of prime order: take any
+$g_0\neq 1$ in it, of order $m$, and a prime $p\mid m$, and set $g=g_0^{m/p}$. Replacing $f$ by
+an image $f^{h}$, which has the same weight, we may assume $g$ is one fixed representative of its
+conjugacy class. The elements of prime order fall into $46$ conjugacy classes (orders $2$, $3$,
+$5$, $7$ with $39$, $5$, $1$, $1$ classes). For each representative $g$, a $g$-invariant function
+is constant on the orbits of $\langle g\rangle$, so the least weight of a $g$-invariant rainbow
+dominating function is the optimum of an integer program with one variable per orbit of
+$\langle g\rangle$ on $\F_3\times\F_2^7$. These $46$ programs, with $60$ to $288$ variables, were
+solved twice by separately written code: first with HiGHS, and again with SCIP~10.0 on a random
+conjugate of each representative. In every case the optimum is $48$, $54$ or $56$, never below
+$48$. The full computation, with a per-class table, is in the companion note~\cite{companion}.
+\end{proof}
+
+Both solvers use floating-point arithmetic, so Theorem~\ref{thm:sym} rests on two independent
+computations that agree, not on an exact certificate. Its meaning is that any function of weight
+$47$, if one exists, is completely asymmetric; in particular, it cannot be found by searching
+among symmetric functions, the usual first approach.
+
+\section{Remarks}
+
+\begin{enumerate}
+\item The same argument shows that $\gamma_{rk}(Q_n)$ equals the minimum size of a covering code of
+  radius $1$ in $A\times\F_2^n$, where $A$ is an alphabet of size $k$. Tables for some such mixed
+  alphabets also exist~\cite{keri}.
+\item Determining $\gamma_{r3}(Q_7)$ is equivalent to determining $K(1,7,1)$. A natural approach is
+  the codeword-distribution method used for $\gamma(Q_9)=62$~\cite{ob}.
+\end{enumerate}
+
+\paragraph{Code and data.} \url{https://github.com/Noah-Parsons/covering-codes}.
+
+\begin{thebibliography}{99}
+
+\bibitem{ahk} J.~Azarija, M.~A. Henning and S.~Klavžar, (Total) domination in prisms,
+\emph{Electron. J. Combin.} 24(1) (2017), \#P1.19.
+
+\bibitem{bow} R.~Bertolo, P.~R.~J. Östergård and W.~D. Weakley, An updated table of
+binary/ternary mixed covering codes, \emph{J. Combin. Des.} 12 (2004), 157--176.
+
+\bibitem{bhr} B.~Brešar, M.~A. Henning and D.~F. Rall, Rainbow domination in graphs,
+\emph{Taiwanese J. Math.} 12 (2008), 213--225.
+
+\bibitem{cohen-book} G.~Cohen, I.~Honkala, S.~Litsyn and A.~Lobstein, \emph{Covering Codes},
+North-Holland, Amsterdam, 1997.
+
+\bibitem{gp} D.~Gijswijt and S.~Polak, Semidefinite lower bounds for covering codes,
+arXiv:2504.01932, 2025.
+
+\bibitem{hhh} T.~W. Haynes, S.~T. Hedetniemi and M.~A. Henning, Domination in grids and
+hypercubes, in: \emph{Domination in Graphs: Core Concepts}, Springer Monographs in Mathematics,
+Springer, Cham, 2023, \href{https://doi.org/10.1007/978-3-031-09496-5_17}{doi:10.1007/978-3-031-09496-5\_17}.
+
+\bibitem{keri} G.~Kéri, Tables for bounds on covering codes,
+\url{https://old.sztaki.hu/~keri/codes/index.htm} (accessed 29 September 2026).
+
+\bibitem{lqs} W.~Lang, J.~Quistorff and E.~Schneider, New results on integer programming for
+codes, \emph{Congr. Numer.} 188 (2007), 97--107.
+
+\bibitem{ob} P.~R.~J. Östergård and U.~Blass, On the size of optimal binary codes of length $9$
+and covering radius $1$, \emph{IEEE Trans. Inform. Theory} 47 (2001), 2556--2557.
+
+\bibitem{oh} P.~R.~J. Östergård and H.~O. Hämäläinen, A new table of binary/ternary mixed
+covering codes, \emph{Des. Codes Cryptogr.} 11 (1997), 151--178.
+
+\bibitem{companion} N.~Parsons, Improving the covering code bound $K(1,7,1)\le 48$ requires an
+asymmetric code, manuscript, 2026.
+
+\bibitem{wu-chen} Y.-S. Wu and J.-Y. Chen, Improved lower bounds on the domination number of
+hypercubes and binary codes with covering radius one, arXiv:2203.16901, 2022.
+
+\bibitem{p3pn} Y.~Wang, X.~Wu, N.~Dehgardi, J.~Amjadi, R.~Khoeilar and J.-B. Liu,
+$k$-rainbow domination number of $P_3\,\square\,P_n$, \emph{Mathematics} 7 (2019), 203,
+\href{https://doi.org/10.3390/math7020203}{doi:10.3390/math7020203}.
+
+\bibitem{cncm} H.~Gao, K.~Li and Y.~Yang, The $k$-rainbow domination number of
+$C_n\,\square\,C_m$, \emph{Mathematics} 7 (2019), 1153,
+\href{https://doi.org/10.3390/math7121153}{doi:10.3390/math7121153}.
+
+\bibitem{c3cm} H.~Gao, C.~Xi and Y.~Yang, The $3$-rainbow domination number of the Cartesian
+product of cycles, \emph{Mathematics} 8 (2020), 65,
+\href{https://doi.org/10.3390/math8010065}{doi:10.3390/math8010065}.
+
+\bibitem{petersen} S.~Brezovnik, D.~Rupnik Poklukar and J.~Žerovnik, On $2$-rainbow domination of
+generalized Petersen graphs $P(ck,k)$, \emph{Mathematics} 11 (2023), 2271,
+\href{https://doi.org/10.3390/math11102271}{doi:10.3390/math11102271}.
+
+\end{thebibliography}
+\end{document}

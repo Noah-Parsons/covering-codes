@@ -1,0 +1,13 @@
+K(1,7,1) ub=47 solver=scip: 46 excluded in first pass, 0 already rechecked, 11 to do
+  p3:t0c1s,b1c0f         orbits= 128 infeasible (1.32s)
+  p3:t0c0s,b2c0f         orbits= 144 infeasible (1.82s)
+  p2:t0c0s,b1c2f         orbits= 192 infeasible (16.4s)
+  p2:t0c0s,b0c3f         orbits= 192 infeasible (23.0s)
+  p2:t0c0s,b0c6f         orbits= 192 infeasible (26.65s)
+  p2:t0c0s,b2c2f         orbits= 192 infeasible (14.74s)
+  p2:t0c1s,b0c5f         orbits= 192 infeasible (25.14s)
+  p2:t0c1s,b0c6f         orbits= 192 infeasible (24.4s)
+  p2:t0c1s,b1c5f         orbits= 192 infeasible (30.85s)
+  p2:t0c1s,b2c2f         orbits= 192 infeasible (35.81s)
+  p2:t0c0s,b2c0f         orbits= 240 infeasible (70.87s)
+done: 11 confirmed this run

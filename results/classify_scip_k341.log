@@ -1,0 +1,5 @@
+K(3,4,1): record=48 ub=47; 62 prime-order classes, 56 already decided
+  p2:t0c2s,b2c0f         orbits=  222 infeasible bound=50.0 (336.68s)
+  p2:t1c0s,b1c0f         orbits=  252 infeasible bound=48.0 (110.99s)
+  p2:t0c0s,b2c0f         orbits=  270 infeasible bound=48.0 (112.8s)
+  p2:t0c1s,b0c0f         orbits=  288 infeasible bound=47.613817878455784 (899.75s)

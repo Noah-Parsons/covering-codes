@@ -1,0 +1,2 @@
+K(1,7,1) ub=47 solver=cbc: 46 excluded in first pass, 0 already rechecked, 6 to do
+  p2:t0c0s,b0c3f         orbits= 192 timeout    (1800.42s)   <-- does NOT confirm
