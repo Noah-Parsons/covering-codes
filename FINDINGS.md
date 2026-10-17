@@ -165,3 +165,39 @@ compute. Stopped before any long run.
   rainbow domination were found (web search, 2026-10-16), so the coding tables give values that
   literature lacks: gamma_r2(Q_n) exact for n <= 8 (gamma_r2(Q_8) = K(9,1) = 62), gamma_r3(Q_n)
   exact for n <= 6 (gamma_r3(Q_6) = 24), 42 <= gamma_r3(Q_7) <= 48.
+
+## Round 7 (2026-10-16): K(2,5,1) >= 33 (improves Kéri's lower bound 32)
+
+Target: K(2,5,1), the smallest open radius-1 entry of the mixed table (288 words). Kéri's table
+(live copy re-downloaded 2026-10-16, identical to the 2026-09-29 copy; last update 2011):
+32 <= K(2,5,1) <= 36, lower bound Lang–Quistorff–Schneider (2007), upper Hämäläinen–Rankinen
+(1991). Web search for later improvements of mixed binary/ternary bounds found none.
+
+Method (`src/split_t2.py`): 3x3 grid of blocks by the two ternary coordinates (each a Q_5);
+block-count inequality 6 M_c + sum over the 4 row/column blocks >= 32; distributions reduced
+under S_3 x S_3 x swap; each solved as an exact covering problem with fixed block counts.
+
+Evidence for "no code with 32 words":
+- SCIP 10: all 10 reduced distributions infeasible (1-5 s each).
+- HiGHS (`src/recheck_t2_highs.py`, model rebuilt from scratch): all 10 infeasible (2-7 s).
+- Reduction check: all 306 raw distributions (enumerated separately, no symmetry) map onto the
+  10, and every one of the 10 is hit; same check passes for M = 33, 34 and the controls.
+- Definition-level check of the distribution step (`src/verify_t2_distributions.py`): the
+  block coefficients computed from Hamming distances alone are 6 (own block), 1 (row/column
+  blocks), 0 (others), i.e. exactly the pruning inequality; a separate vectorised enumeration of
+  all 76,904,685 spreads of 32 words (95,548,245 for 33) using those computed coefficients gives
+  exactly the same 306 (1,194) distributions as split_t2, none missing, none extra.
+- Model check: a real 36-word code (results/codes/K_2_5_1_M36_direct.txt, checker VALID) is
+  accepted by the per-case model; the same code with one word removed is rejected.
+- Controls with the same pipeline: K(2,3,1): no code at 11, code at 12; K(2,4,1): no code at
+  19, code at 20 (codes checker VALID). HiGHS recheck agrees at 11 and 19 and finds codes at 12.
+- CP-SAT (integer) recheck started; slow on these instances, not needed for the claim.
+
+- Gurobi 13.0.3 (size-limited pip licence, `src/recheck_t2_gurobi.py`, model built separately):
+  all 10 (M=32) and all 32 (M=33) infeasible, <= 1.5 s each; agrees with the small controls
+  (no code at 11 and 19, codes found at 12 and 20).
+
+**M = 33: SCIP and Gurobi both find all 32 cases infeasible, so K(2,5,1) >= 34.** HiGHS agreed on
+31 of 32; its last case had not finished after ~30 min. Write-up: paper/k251.tex.
+M = 34: SCIP 84 infeasible, 9 timed out at 300 s, so undecided.
+Caveat: SCIP and HiGHS are floating-point branch-and-bound solvers; two independent ones agree.

@@ -2,3 +2,6 @@
 {"B": 3, "M": 12, "distributions": 35, "verdict": "code found", "tally": {"infeasible": 2, "optimal": 1}, "tlim": 60.0, "seconds": 0.0}
 {"B": 4, "M": 19, "distributions": 7, "verdict": "no code", "tally": {"infeasible": 7}, "tlim": 60.0, "seconds": 4.7}
 {"B": 4, "M": 20, "distributions": 45, "verdict": "code found", "tally": {"infeasible": 42, "optimal": 1}, "tlim": 60.0, "seconds": 37.0}
+{"B": 3, "M": 11, "distributions": 6, "verdict": "no code", "tally": {"infeasible": 6}, "tlim": 60.0, "seconds": 0.5}
+{"B": 4, "M": 19, "distributions": 7, "verdict": "no code", "tally": {"infeasible": 7}, "tlim": 60.0, "seconds": 3.5}
+{"B": 5, "M": 34, "distributions": 93, "verdict": "undecided", "tally": {"infeasible": 84, "timelimit": 9}, "tlim": 300.0, "seconds": 3665.1}

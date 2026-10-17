@@ -1,0 +1,34 @@
+HiGHS recheck K(2,5,1) M=33: 32 cases
+  0: (3, 3, 3, 3, 3, 3, 5, 5, 5) -> infeasible (3s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  1: (3, 3, 3, 3, 3, 4, 5, 5, 4) -> infeasible (2s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  2: (3, 3, 3, 3, 3, 5, 5, 5, 3) -> infeasible (2s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  3: (3, 3, 3, 3, 4, 4, 5, 4, 4) -> infeasible (2s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  4: (3, 3, 3, 3, 4, 5, 5, 4, 3) -> infeasible (2s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  5: (3, 3, 3, 4, 4, 4, 4, 4, 4) -> infeasible (4s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  6: (3, 3, 4, 3, 3, 4, 4, 4, 5) -> infeasible (4s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  7: (3, 3, 4, 3, 3, 4, 4, 5, 4) -> infeasible (5s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  8: (3, 3, 4, 3, 3, 4, 4, 6, 3) -> infeasible (12s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  9: (3, 3, 4, 3, 3, 4, 5, 5, 3) -> infeasible (229s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  10: (3, 3, 4, 3, 3, 5, 4, 5, 3) -> infeasible (12s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  11: (3, 3, 4, 3, 4, 3, 4, 3, 6) -> infeasible (4s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  12: (3, 3, 4, 3, 4, 3, 4, 4, 5) -> infeasible (26s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  13: (3, 3, 4, 3, 4, 3, 5, 3, 5) -> infeasible (45s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  14: (3, 3, 4, 3, 4, 3, 5, 4, 4) -> infeasible (73s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  15: (3, 3, 4, 3, 4, 3, 6, 3, 4) -> infeasible (25s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  16: (3, 3, 4, 3, 4, 3, 7, 3, 3) -> infeasible (11s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  17: (3, 3, 4, 3, 4, 4, 4, 4, 4) -> infeasible (36s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  18: (3, 3, 4, 3, 4, 4, 4, 5, 3) -> infeasible (19s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  19: (3, 3, 4, 3, 4, 4, 5, 3, 4) -> infeasible (29s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  20: (3, 3, 4, 3, 4, 4, 5, 4, 3) -> infeasible (125s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  21: (3, 3, 4, 3, 4, 4, 6, 3, 3) -> infeasible (41s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  22: (3, 3, 4, 3, 4, 5, 5, 3, 3) -> infeasible (27s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  23: (3, 3, 4, 3, 5, 3, 5, 3, 4) -> infeasible (72s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  24: (3, 3, 4, 3, 5, 3, 5, 4, 3) -> infeasible (27s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  25: (3, 3, 4, 3, 5, 3, 6, 3, 3) -> infeasible (70s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  26: (3, 3, 4, 3, 5, 4, 4, 4, 3) -> infeasible (43s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  27: (3, 3, 4, 4, 4, 3, 4, 4, 4) -> infeasible (143s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  28: (3, 3, 4, 4, 4, 3, 4, 5, 3) -> infeasible (201s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  29: (3, 3, 5, 3, 5, 3, 5, 3, 3) -> infeasible (161s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  30: (3, 3, 5, 4, 4, 3, 4, 4, 3) -> infeasible (123s) The problem is infeasible. (HiGHS Status 8: model_status is 
+  31: (3, 4, 4, 4, 3, 4, 4, 4, 3) -> timeout (1800s) Time limit reached. (HiGHS Status 13: model_status is Time l
+done: {'infeasible': 31, 'timeout': 1}

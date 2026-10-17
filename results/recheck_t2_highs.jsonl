@@ -1,0 +1,5 @@
+{"B": 3, "M": 11, "cases": 6, "tally": {"infeasible": 6}, "tlim": 60.0}
+{"B": 4, "M": 19, "cases": 7, "tally": {"infeasible": 7}, "tlim": 60.0}
+{"B": 3, "M": 12, "cases": 35, "tally": {"infeasible": 29, "feasible": 6}, "tlim": 60.0}
+{"B": 5, "M": 32, "cases": 10, "tally": {"infeasible": 10}, "tlim": 1800.0}
+{"B": 5, "M": 33, "cases": 32, "tally": {"infeasible": 31, "timeout": 1}, "tlim": 1800.0}

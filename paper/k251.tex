@@ -1,0 +1,176 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb{F}}
+% The bound proved. 34 needs both solvers to exclude M = 33; 33 needs M = 32 only.
+\newcommand{\newbound}{34}
+\newcommand{\lastM}{33}
+
+\title{A new lower bound for the mixed covering code $K(2,5,1)$}
+\author{Noah Parsons\\ \small Independent researcher\thanks{%
+\texttt{parsons.m.noah@gmail.com}, ORCID \href{https://orcid.org/0009-0000-7224-6040}{0009-0000-7224-6040}.}}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $K(t,b,1)$ be the minimum size of a code in $\F_3^t\times\F_2^b$ with covering radius $1$.
+The tables of mixed binary/ternary covering codes give $32\le K(2,5,1)\le 36$, the smallest open
+entry for covering radius $1$. We prove $K(2,5,1)\ge\newbound$. The space is split into nine
+blocks by the two ternary coordinates; a counting inequality leaves few possible distributions of
+codewords over the blocks, and each remaining case is shown infeasible by integer programming.
+Two independent solvers agree on every case, and every step of the reduction is checked by
+separately written code.
+\end{abstract}
+
+\section{Introduction}
+
+A code $C\subseteq\F_3^t\times\F_2^b$ has \emph{covering radius $1$} if every word is within
+Hamming distance $1$ of some codeword, and $K(t,b,1)$ is the minimum size of such a
+code~\cite{cohen-book}. Bounds for $t+b\le 13$ are collected in the tables of
+K\'eri~\cite{keri}, following~\cite{oh,bow}. For $K(2,5,1)$, the entry with the smallest space
+($9\cdot 32=288$ words) among the open radius-$1$ entries, the tables give
+\[
+32\le K(2,5,1)\le 36 .
+\]
+The upper bound is due to Hämäläinen and Rankinen~\cite{hr}, the lower bound to Lang, Quistorff
+and Schneider~\cite{lqs}. We are not aware of any later improvement.
+
+\begin{theorem}\label{thm:main}
+$K(2,5,1)\ge\newbound$.
+\end{theorem}
+
+Since a code with fewer than $M$ words can be enlarged to exactly $M$ words without losing the
+covering property, it suffices to show that no covering code with exactly $M$ words exists for
+$M=32$ and $M=\lastM$.
+
+\section{Method}
+
+Write words as $(a,b,r)$ with $a,b\in\F_3$ and $r\in\F_2^5$. The \emph{block} $c=(a,b)$ is the
+set of $32$ words with these ternary coordinates; the nine blocks form a $3\times 3$ grid. For a
+code $C$ let $M_c=|C\cap c|$.
+
+\begin{lemma}\label{lem:count}
+If $C$ has covering radius $1$, then for every block $c$,
+\[
+6M_c+\sum_{d\in N(c)} M_d\ \ge\ 32,
+\]
+where $N(c)$ is the set of the four blocks in the same row or column of the grid as $c$.
+\end{lemma}
+
+\begin{proof}
+Every word of $c$ lies in the ball of some codeword, so the balls of radius $1$ around the
+codewords, intersected with $c$, cover all $32$ words of $c$. A codeword in $c$ meets $c$ in
+itself and its $5$ binary neighbours. A codeword in a block of $N(c)$ differs from $c$ in exactly
+one ternary coordinate, so its ball meets $c$ in exactly one word. A codeword in any other block
+differs from every word of $c$ in both ternary coordinates, so its ball misses $c$. Summing gives
+the inequality.
+\end{proof}
+
+The search for a code with $M$ words therefore proceeds in two steps.
+\begin{enumerate}
+\item \textbf{Distributions.} List every $(M_c)_c$ with $0\le M_c\le 32$, $\sum_c M_c=M$, that
+  satisfies Lemma~\ref{lem:count} for all nine blocks. Permuting the symbols of either ternary
+  coordinate, and swapping the two ternary coordinates, are isometries; they act on the grid as a
+  group of order $72$, and one representative of each orbit of distributions is kept.
+\item \textbf{Exact cases.} For each representative, decide by integer programming whether there
+  is a covering code with exactly $M_c$ codewords in each block $c$: one binary variable per word,
+  one covering constraint per word, and one count constraint per block.
+\end{enumerate}
+
+\section{Computation}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrccc}
+\toprule
+$M$ & distributions & up to symmetry & SCIP 10.0 & Gurobi 13.0 & HiGHS \\
+\midrule
+32 & 306   & 10 & 10 infeasible & 10 infeasible & 10 infeasible \\
+33 & 1\,194 & 32 & 32 infeasible & 32 infeasible & 31 infeasible, 1 open \\
+\bottomrule
+\end{tabular}
+\caption{Cases for $K(2,5,1)$. Each solver was run on a model built by separate code. HiGHS
+(through SciPy~1.16.3) is a third, slower check; one case at $M=33$ had not finished after
+30 minutes.}
+\label{tab:cases}
+\end{table}
+
+Table~\ref{tab:cases} summarises the computation. Every case was found infeasible by SCIP~10.0
+(through PySCIPOpt) and, with a separately written model, by Gurobi~13.0 (through gurobipy),
+single-threaded on one core of an Intel Core Ultra~7 255HX. Each case took at most $33$ seconds
+with SCIP and at most $1.5$ seconds with Gurobi. HiGHS, a third solver, agrees on every case it
+finished.
+
+The following checks were made on the steps before the solvers.
+\begin{itemize}
+\item \emph{Lemma~\ref{lem:count} from the definition.} For each block $c$ and each word $u$, the
+  number of words of $c$ whose ball contains $u$ was computed from Hamming distances alone. It is
+  $6$ for $u\in c$, $1$ for $u$ in a block of $N(c)$ and $0$ otherwise, as in the lemma.
+\item \emph{Distributions.} A separate, vectorised enumeration of all $76\,904\,685$ ways to place
+  $32$ words in nine blocks ($95\,548\,245$ for $33$), using the coefficients computed above,
+  yields exactly the same $306$ ($1\,194$) distributions.
+\item \emph{Symmetry reduction.} Each of these distributions is equivalent to one of the
+  representatives, and each representative occurs.
+\item \emph{The exact model.} A $36$-word covering code found independently satisfies the model
+  for its own distribution, and the same code with one word removed does not.
+\item \emph{Known values.} The same pipeline reproduces $K(2,3,1)=12$ and $K(2,4,1)=20$: it
+  reports no code with $11$ and $19$ words, and finds codes with $12$ and $20$ words, which an
+  independent brute-force checker confirms.
+\end{itemize}
+
+\begin{remark}
+All three solvers use floating-point arithmetic, so each verdict is evidence rather than an
+exact certificate; they come from different teams and agree wherever they finished.
+\end{remark}
+
+\begin{remark}
+For $M=34$ there are $4\,266$ distributions, $93$ up to symmetry. SCIP finds $84$ of these
+infeasible; $9$ were still open after $300$ seconds each. Settling them would give
+$K(2,5,1)\ge 35$.
+\end{remark}
+
+\paragraph{Code and data.} All programs and logs are in the public repository
+\begin{center}\url{https://github.com/Noah-Parsons/covering-codes}\end{center}
+\begin{itemize}
+\item the search: \texttt{src/split\_t2.py};
+\item the Gurobi and HiGHS rechecks: \texttt{src/recheck\_t2\_gurobi.py},
+  \texttt{src/recheck\_t2\_highs.py};
+\item the checks of the reduction: \texttt{src/verify\_t2\_distributions.py};
+\item logs: \texttt{results/}.
+\end{itemize}
+
+\begin{thebibliography}{9}
+
+\bibitem{bow} R.~Bertolo, P.~R.~J. Östergård and W.~D. Weakley, An updated table of
+binary/ternary mixed covering codes, \emph{J. Combin. Des.} 12 (2004), 157--176.
+
+\bibitem{cohen-book} G.~Cohen, I.~Honkala, S.~Litsyn and A.~Lobstein, \emph{Covering Codes},
+North-Holland, Amsterdam, 1997.
+
+\bibitem{hr} H.~Hämäläinen and S.~Rankinen, Upper bounds for football pool problems and mixed
+covering codes, \emph{J. Combin. Theory Ser.~A} 56 (1991), 84--95.
+
+\bibitem{keri} G.~Kéri, Tables for bounds on covering codes,
+\url{https://old.sztaki.hu/~keri/codes/index.htm} (accessed 16 October 2026).
+
+\bibitem{lqs} W.~Lang, J.~Quistorff and E.~Schneider, New results on integer programming for
+codes, \emph{Congr. Numer.} 188 (2007), 97--107.
+
+\bibitem{oh} P.~R.~J. Östergård and H.~O. Hämäläinen, A new table of binary/ternary mixed
+covering codes, \emph{Des. Codes Cryptogr.} 11 (1997), 151--178.
+
+\end{thebibliography}
+\end{document}

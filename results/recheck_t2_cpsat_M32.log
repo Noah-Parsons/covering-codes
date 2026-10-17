@@ -1,0 +1,2 @@
+CP-SAT recheck K(2,5,1) M=32: 10 cases
+  0: (3, 3, 4, 3, 3, 4, 4, 4, 4) -> UNKNOWN (1800s)
