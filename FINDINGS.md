@@ -202,7 +202,7 @@ Evidence for "no code with 32 words":
 M = 34: SCIP 84 infeasible, 9 timed out at 300 s, so undecided.
 Caveat: SCIP and HiGHS are floating-point branch-and-bound solvers; two independent ones agree.
 
-## Round 8 (2026-10-18): K(1,7,1) >= 44 (improves Kéri's lower bound 42)
+## Round 8 (2026-10-18): K(1,7,1) >= 45 (improves Kéri's lower bound 42)
 
 Kéri (2011, live copy unchanged on 2026-10-16): 42 <= K(1,7,1) <= 48, lower bound
 Lang–Quistorff–Schneider (2007). Near the lower bound the distribution method of round 5 is small.
@@ -215,9 +215,12 @@ cell inequality (1+f) M_x + sum over neighbouring cells >= 2^f), leaves solved e
 |---|---|---|---|---|
 | 42 | 24 | 24 infeasible (31 s) | 24 infeasible (206 s) | 596 |
 | 43 | 109 | 109 infeasible (216 s) | 109 infeasible (107 at 900 s limit; cases 73, 106 rerun: 1564 s, 2514 s) | 3,936 |
+| 44 | 489 | 489 infeasible (1078 s) | stopped at 187 of 489 (3 timeouts); CPLEX 22.2: 489 infeasible (1287 s) | 18,108 |
 
 Checks: level 0-2 coefficients derived from Hamming distances (`src/verify_t1_leaves.py`) match
 the cell inequality; the brute-force level-2 distributions (separate enumeration, 48 symmetries
 written out directly) all map onto exact_dist's leaves and every leaf is hit (also for K(1,5,1)
 M=15 and K(1,6,1) M=24). Controls with leaves_t1 + Gurobi: K(1,5,1) none at 15, code at 16;
 K(1,6,1) none at 23, code at 24 (codes checker VALID).
+
+Round 8 addendum: CPLEX 22.2 Community Edition (`pip install cplex`, limit 1000 variables/constraints; models have 384 / 396) added to `src/leaves_t1.py`. Controls pass (none at 15/23, codes at 16/24, checker VALID); M=42: 24 infeasible in 14 s. **M=44: Gurobi and CPLEX both find all 489 cases infeasible, so K(1,7,1) >= 45.** SCIP was too slow at M=44 and was stopped.

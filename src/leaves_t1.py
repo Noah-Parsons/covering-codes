@@ -47,6 +47,30 @@ def solve(d):
         st = {GRB.INFEASIBLE: "infeasible", GRB.OPTIMAL: "feasible", GRB.TIME_LIMIT: "timeout"}.get(m.Status, str(m.Status))
         code = [words[j] for j in range(len(words)) if st == "feasible" and x[j].X > 0.5]
         return st, code
+    if a.solver == "cplex":
+        # CPLEX Community Edition (pip install cplex): limit 1000 variables / 1000 constraints.
+        import cplex
+        c = cplex.Cplex()
+        for stream in (c.set_log_stream, c.set_results_stream, c.set_warning_stream, c.set_error_stream):
+            stream(None)
+        c.parameters.timelimit.set(a.tlim); c.parameters.threads.set(1)
+        c.variables.add(types="B" * len(words))
+        rows, senses, rhs = [], [], []
+        for bl in balls:
+            rows.append([bl, [1.0] * len(bl)]); senses.append("G"); rhs.append(1.0)
+        for cc in range(3 * n):
+            idx = [j for j in range(len(words)) if cells[j] == cc]
+            rows.append([idx, [1.0] * len(idx)]); senses.append("E"); rhs.append(float(d[cc]))
+        c.linear_constraints.add(lin_expr=rows, senses="".join(senses), rhs=rhs)
+        c.solve()
+        s = c.solution.get_status()
+        S = c.solution.status
+        if s in (S.MIP_infeasible, S.MIP_infeasible_or_unbounded):
+            return "infeasible", []
+        if s in (S.MIP_optimal, S.optimal_tolerance, S.MIP_feasible):
+            vals = c.solution.get_values()
+            return "feasible", [words[j] for j in range(len(words)) if vals[j] > 0.5]
+        return "timeout", []
     from pyscipopt import Model, quicksum
     m = Model(); m.hideOutput(); m.setParam("limits/time", a.tlim)
     x = [m.addVar(vtype="B") for _ in words]

@@ -1,0 +1,5 @@
+level 0 coefficients (row 0): [8, 1, 1]
+level 1 coefficients (row 0): [7, 1, 1, 0, 1, 0]
+level 2 coefficients (row 0): [6, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+brute force: 651 level-1 distributions, 18108 level-2 distributions
+leaves from exact_dist: 489; raw unmatched: 0; leaves never hit: 0
