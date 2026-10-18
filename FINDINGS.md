@@ -201,3 +201,23 @@ Evidence for "no code with 32 words":
 31 of 32; its last case had not finished after ~30 min. Write-up: paper/k251.tex.
 M = 34: SCIP 84 infeasible, 9 timed out at 300 s, so undecided.
 Caveat: SCIP and HiGHS are floating-point branch-and-bound solvers; two independent ones agree.
+
+## Round 8 (2026-10-18): K(1,7,1) >= 44 (improves Kéri's lower bound 42)
+
+Kéri (2011, live copy unchanged on 2026-10-16): 42 <= K(1,7,1) <= 48, lower bound
+Lang–Quistorff–Schneider (2007). Near the lower bound the distribution method of round 5 is small.
+
+Method: `src/exact_dist.py` levels 0-2 (cells = ternary value x first 2 binary coordinates,
+cell inequality (1+f) M_x + sum over neighbouring cells >= 2^f), leaves solved exactly by
+`src/leaves_t1.py` with Gurobi 13.0.3 and SCIP 10.0 (separate model code from exact_dist).
+
+| M | leaves | Gurobi | SCIP | brute-force distributions (all mapped onto leaves) |
+|---|---|---|---|---|
+| 42 | 24 | 24 infeasible (31 s) | 24 infeasible (206 s) | 596 |
+| 43 | 109 | 109 infeasible (216 s) | 109 infeasible (107 at 900 s limit; cases 73, 106 rerun: 1564 s, 2514 s) | 3,936 |
+
+Checks: level 0-2 coefficients derived from Hamming distances (`src/verify_t1_leaves.py`) match
+the cell inequality; the brute-force level-2 distributions (separate enumeration, 48 symmetries
+written out directly) all map onto exact_dist's leaves and every leaf is hit (also for K(1,5,1)
+M=15 and K(1,6,1) M=24). Controls with leaves_t1 + Gurobi: K(1,5,1) none at 15, code at 16;
+K(1,6,1) none at 23, code at 24 (codes checker VALID).

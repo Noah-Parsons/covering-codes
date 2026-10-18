@@ -1,0 +1,9 @@
+{"B": 5, "M": 15, "leaf": 2, "solver": "gurobi", "leaves": 46, "tally": {"infeasible": 46}, "tlim": 60.0}
+{"B": 5, "M": 16, "leaf": 2, "solver": "gurobi", "leaves": 342, "tally": {"infeasible": 18, "feasible": 1}, "tlim": 60.0}
+{"B": 6, "M": 23, "leaf": 2, "solver": "gurobi", "leaves": 0, "tally": {}, "tlim": 60.0}
+{"B": 6, "M": 24, "leaf": 2, "solver": "gurobi", "leaves": 4, "tally": {"infeasible": 2, "feasible": 1}, "tlim": 60.0}
+{"B": 7, "M": 42, "leaf": 2, "solver": "gurobi", "leaves": 24, "tally": {"infeasible": 24}, "tlim": 600.0}
+{"B": 7, "M": 42, "leaf": 2, "solver": "scip", "leaves": 24, "tally": {"infeasible": 24}, "tlim": 600.0}
+{"B": 7, "M": 43, "leaf": 2, "solver": "gurobi", "leaves": 109, "tally": {"infeasible": 109}, "tlim": 300.0}
+{"B": 7, "M": 43, "leaf": 2, "solver": "scip", "leaves": 109, "tally": {"infeasible": 107, "timeout": 2}, "tlim": 900.0}
+{"B": 7, "M": 43, "leaf": 2, "solver": "scip", "leaves": 109, "tally": {"infeasible": 2}, "tlim": 3600.0}

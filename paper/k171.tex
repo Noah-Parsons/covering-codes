@@ -1,0 +1,174 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb{F}}
+
+\title{A new lower bound for the mixed covering code $K(1,7,1)$}
+\author{Noah Parsons\\ \small Independent researcher\thanks{%
+\texttt{parsons.m.noah@gmail.com}, ORCID \href{https://orcid.org/0009-0000-7224-6040}{0009-0000-7224-6040}.}}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $K(1,7,1)$ be the minimum size of a code in $\F_3\times\F_2^7$ with covering radius $1$. The
+tables of mixed binary/ternary covering codes give $42\le K(1,7,1)\le 48$. We prove
+$K(1,7,1)\ge 44$. Following the codeword-distribution method of Östergård and Blass, the space is
+divided into cells by fixing the ternary coordinate and two binary coordinates; a counting
+inequality leaves $24$ possible distributions of $42$ codewords over the cells and $109$ of $43$
+codewords, up to symmetry. Each is shown infeasible by integer programming with two independent
+solvers, and the list of distributions is checked by a separate brute-force enumeration.
+\end{abstract}
+
+\section{Introduction}
+
+A code $C\subseteq\F_3^t\times\F_2^b$ has \emph{covering radius $1$} if every word is within
+Hamming distance $1$ of some codeword, and $K(t,b,1)$ is the minimum size of such a
+code~\cite{cohen-book}. Bounds are collected in the tables of K\'eri~\cite{keri},
+following~\cite{oh,bow}. For $K(1,7,1)$ the tables give
+\[
+42\le K(1,7,1)\le 48 .
+\]
+The lower bound is due to Lang, Quistorff and Schneider~\cite{lqs}. The upper bound is the
+elementary construction $K(1,7,1)\le 3K(0,7,1)=3\cdot 16$, the direct product of $\F_3$ with the
+binary Hamming code of length $7$. We are not aware of any later improvement.
+
+\begin{theorem}\label{thm:main}
+$K(1,7,1)\ge 44$.
+\end{theorem}
+
+A code with fewer than $M$ words can be enlarged to exactly $M$ words without losing the covering
+property, so it suffices to show that no covering code with exactly $42$ or exactly $43$ words
+exists.
+
+\section{Method}
+
+Write words as $(a,v)$ with $a\in\F_3$ and $v=(v_1,\dots,v_7)\in\F_2^7$. For $0\le m\le 7$, the
+\emph{level-$m$ cell} $(a,x)$, $x\in\F_2^m$, is the set of $2^{7-m}$ words with ternary
+coordinate $a$ and $(v_1,\dots,v_m)=x$. For a code $C$ let $M_{a,x}=|C\cap(a,x)|$.
+
+\begin{lemma}\label{lem:count}
+If $C$ has covering radius $1$, then for every level-$m$ cell $(a,x)$, with $f=7-m$,
+\[
+(1+f)\,M_{a,x}+\sum_{a'\neq a}M_{a',x}+\sum_{i=1}^{m}M_{a,\,x+e_i}\ \ge\ 2^{f}.
+\]
+\end{lemma}
+
+\begin{proof}
+The balls of radius $1$ around the codewords cover the $2^f$ words of the cell. A codeword in the
+cell covers itself and its $f$ neighbours in the cell, obtained by changing one free binary
+coordinate. A codeword in a cell $(a',x)$ with $a'\neq a$, or $(a,x+e_i)$, differs from the cell
+in exactly one fixed coordinate, so its ball meets the cell in exactly one word. A codeword in
+any other cell differs from every word of the cell in at least two fixed coordinates, so its ball
+misses the cell.
+\end{proof}
+
+This is the inequality of Östergård and Blass~\cite{ob} adapted to one ternary coordinate. The
+search for a code with $M$ words has two steps.
+\begin{enumerate}
+\item \textbf{Distributions.} At level $0$, list the triples $(M_0,M_1,M_2)$ with sum $M$ that
+  satisfy Lemma~\ref{lem:count}; at levels $1$ and $2$, split each cell in two and keep the
+  refinements that satisfy the lemma at the new level. Permuting the ternary symbols and
+  permuting or complementing the fixed binary coordinates are isometries; at level $2$ they form a
+  group of order $3!\cdot 2^2\cdot 2!=48$, and one representative of each orbit is kept.
+\item \textbf{Exact cases.} For each level-$2$ representative, decide by integer programming
+  whether there is a covering code with exactly $M_{a,x}$ codewords in each of the $12$ cells:
+  one binary variable per word, one covering constraint per word, one count constraint per cell.
+\end{enumerate}
+
+\section{Computation}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrcc}
+\toprule
+$M$ & level-2 distributions & up to symmetry & Gurobi 13.0 & SCIP 10.0 \\
+\midrule
+42 & 596    & 24  & 24 infeasible  & 24 infeasible \\
+43 & 3\,936 & 109 & 109 infeasible & 109 infeasible \\
+\bottomrule
+\end{tabular}
+\caption{Cases for $K(1,7,1)$. The two solvers were run on the same models, built by code separate
+from the enumeration.}\label{tab:cases}
+\end{table}
+
+Table~\ref{tab:cases} summarises the computation, single-threaded on one core of an Intel Core
+Ultra~7 255HX. Gurobi~13.0 (through gurobipy) took at most $3.6$ seconds per case. SCIP~10.0
+(through PySCIPOpt) took at most $2$ minutes per case except two cases at $M=43$, which needed
+$26$ and $42$ minutes.
+
+The following checks were made on the steps before the solvers.
+\begin{itemize}
+\item \emph{Lemma~\ref{lem:count} from the definition.} For levels $0$, $1$ and $2$, the number
+  of words of a cell whose ball contains a given word $u$ was computed from Hamming distances
+  alone; it depends only on the cell of $u$, and equals the coefficients in the lemma.
+\item \emph{Distributions.} A separate brute-force enumeration of the level-$2$ distributions,
+  imposing the computed inequalities at levels $0$, $1$ and $2$, gives $596$ distributions for
+  $M=42$ and $3\,936$ for $M=43$. With the $48$ symmetries written out independently, each is
+  equivalent to one of the representatives, and each representative occurs.
+\item \emph{The exact model.} The $48$-word record code satisfies the model for its own cell
+  distribution, and the same code with one word removed does not.
+\item \emph{Known values.} The same pipeline reports no code with $15$ words for $K(1,5,1)$ and
+  none with $23$ words for $K(1,6,1)$, and finds codes with $16$ and $24$ words, which an
+  independent brute-force checker confirms; these are the known values $K(1,5,1)=16$ and
+  $K(1,6,1)=24$.
+\end{itemize}
+
+\begin{remark}
+Both solvers use floating-point arithmetic, so each verdict is evidence rather than an exact
+certificate; the two solvers come from different teams and agree on every case.
+\end{remark}
+
+\begin{remark}
+In a companion note~\cite{companion} we show by computer that any covering code of radius $1$ in
+$\F_3\times\F_2^7$ with at most $47$ words has trivial automorphism group. Together with
+Theorem~\ref{thm:main}, a code improving the upper bound $48$ would have $44$ to $47$ words and no
+symmetry.
+\end{remark}
+
+\paragraph{Code and data.} All programs and logs are in the public repository
+\begin{center}\url{https://github.com/Noah-Parsons/covering-codes}\end{center}
+\begin{itemize}
+\item distributions: \texttt{src/exact\_dist.py};
+\item exact cases with Gurobi or SCIP: \texttt{src/leaves\_t1.py};
+\item checks of the distribution step: \texttt{src/verify\_t1\_leaves.py};
+\item logs: \texttt{results/leaves\_K171\_*.log}.
+\end{itemize}
+
+\begin{thebibliography}{9}
+
+\bibitem{bow} R.~Bertolo, P.~R.~J. Östergård and W.~D. Weakley, An updated table of
+binary/ternary mixed covering codes, \emph{J. Combin. Des.} 12 (2004), 157--176.
+
+\bibitem{cohen-book} G.~Cohen, I.~Honkala, S.~Litsyn and A.~Lobstein, \emph{Covering Codes},
+North-Holland, Amsterdam, 1997.
+
+\bibitem{keri} G.~Kéri, Tables for bounds on covering codes,
+\url{https://old.sztaki.hu/~keri/codes/index.htm} (accessed 16 October 2026).
+
+\bibitem{lqs} W.~Lang, J.~Quistorff and E.~Schneider, New results on integer programming for
+codes, \emph{Congr. Numer.} 188 (2007), 97--107.
+
+\bibitem{ob} P.~R.~J. Östergård and U.~Blass, On the size of optimal binary codes of length $9$
+and covering radius $1$, \emph{IEEE Trans. Inform. Theory} 47 (2001), 2556--2557.
+
+\bibitem{oh} P.~R.~J. Östergård and H.~O. Hämäläinen, A new table of binary/ternary mixed
+covering codes, \emph{Des. Codes Cryptogr.} 11 (1997), 151--178.
+
+\bibitem{companion} N.~Parsons, Improving the covering code bound $K(1,7,1)\le 48$ requires an
+asymmetric code, manuscript, 2026.
+
+\end{thebibliography}
+\end{document}
