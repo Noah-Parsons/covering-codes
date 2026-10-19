@@ -1,0 +1,261 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb{F}}
+
+\title{New lower bounds for mixed binary/ternary covering codes}
+\author{Noah Parsons\\ \small Independent researcher\thanks{%
+\texttt{parsons.m.noah@gmail.com}, ORCID \href{https://orcid.org/0009-0000-7224-6040}{0009-0000-7224-6040}.}}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $K(t,b,1)$ be the minimum size of a code in $\F_3^t\times\F_2^b$ with covering radius $1$.
+We prove $K(2,5,1)\ge 34$, $K(1,7,1)\ge 45$ and $K(2,6,1)\ge 59$, improving the lower bounds
+$32$, $42$ and $57$ in the tables of mixed binary/ternary covering codes. These are three of the
+five smallest open entries for covering radius $1$. The proofs follow the codeword-distribution
+method of Östergård and Blass: the space is divided into cells, a counting inequality restricts
+the number of codewords in each cell, and every remaining distribution is shown infeasible by
+integer programming. Each case is decided by two independent solvers, Gurobi and CPLEX, and
+the steps that produce the cases are checked against the definitions by separately written code.
+\end{abstract}
+
+\section{Introduction}
+
+A code $C\subseteq\F_3^t\times\F_2^b$ has \emph{covering radius $1$} if every word is within
+Hamming distance $1$ of some codeword. The minimum size of such a code is denoted
+$K(t,b,1)$~\cite{cohen-book}. Bounds for $t+b\le 13$ are collected in the tables of
+K\'eri~\cite{keri}, which follow the tables of Östergård and Hämäläinen~\cite{oh} and of
+Bertolo, Östergård and Weakley~\cite{bow}; the tables were last updated in 2011.
+
+Ordered by the size $3^t2^b$ of the space, the five smallest open entries for covering radius $1$
+are $K(2,5,1)$, $K(1,7,1)$, $K(3,4,1)$, $K(5,1,1)$ and $K(2,6,1)$ (spaces of $288$, $384$, $432$,
+$486$ and $576$ words). This note improves the lower bound of three of them.
+
+\begin{theorem}\label{thm:main}
+$K(2,5,1)\ge 34$, $K(1,7,1)\ge 45$ and $K(2,6,1)\ge 59$.
+\end{theorem}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\toprule
+Entry & Previous bounds~\cite{keri} & Sources & New lower bound \\
+\midrule
+$K(2,5,1)$ & $32$--$36$ & \cite{lqs}, \cite{hr} & $34$ \\
+$K(1,7,1)$ & $42$--$48$ & \cite{lqs}, $3K(0,7,1)$ & $45$ \\
+$K(2,6,1)$ & $57$--$64$ & \cite{lqs}, \cite{hr} & $59$ \\
+\bottomrule
+\end{tabular}
+\caption{The three entries. All three previous lower bounds are due to Lang, Quistorff and
+Schneider~\cite{lqs}. The upper bounds are due to Hämäläinen and Rankinen~\cite{hr}, and for
+$K(1,7,1)$ to the direct product of $\F_3$ with the binary Hamming code of length $7$.}
+\label{tab:entries}
+\end{table}
+
+We are not aware of improvements to these entries after 2011. Since a covering code with fewer
+than $M$ words can be enlarged to exactly $M$ words, a lower bound $K\ge M+1$ follows from the
+nonexistence of covering codes with exactly $M'$ words for each $M'$ from the previous lower bound
+up to $M$.
+
+\section{Method}
+
+\subsection{Cells and the counting inequality}
+
+Fix a set $T$ of coordinates. For each assignment $x$ of values to the coordinates in $T$, the
+\emph{cell} $S_x$ is the set of words that agree with $x$ on $T$. It has $2^f$ words when the
+free coordinates (those outside $T$) are $f$ binary coordinates, as in all cases below. Two cells
+are \emph{adjacent} if their assignments differ in exactly one coordinate. For a code $C$ write
+$M_x=|C\cap S_x|$.
+
+\begin{lemma}\label{lem:count}
+If $C$ has covering radius $1$ and the free coordinates are $f$ binary coordinates, then for every
+cell $S_x$
+\[
+(1+f)\,M_x+\sum_{y\ \text{adjacent to}\ x} M_y\ \ge\ 2^{f}.
+\]
+\end{lemma}
+
+\begin{proof}
+The balls of radius $1$ around the codewords cover the $2^f$ words of $S_x$. A codeword in $S_x$
+covers itself and the $f$ words of $S_x$ obtained by changing one free coordinate. A codeword in
+an adjacent cell differs from $S_x$ in exactly one fixed coordinate, so its ball meets $S_x$ in
+exactly one word. A codeword in any other cell differs from every word of $S_x$ in at least two
+coordinates, so its ball misses $S_x$.
+\end{proof}
+
+Lemma~\ref{lem:count} is the inequality of Östergård and Blass~\cite{ob}, used there for
+$K(9,1)=62$, written for mixed alphabets. We use two kinds of cells.
+
+\paragraph{Two ternary coordinates.} For $K(2,b,1)$ we fix both ternary coordinates. The nine
+cells form a $3\times 3$ grid, each cell has $f=b$ free coordinates, and a cell is adjacent to the
+four cells in its row and column. Writing $R$ and $C$ for the totals of the row and column of a
+cell, the inequality becomes
+\begin{equation}\label{eq:grid}
+(b-1)\,M_x+R+C\ \ge\ 2^b ,
+\end{equation}
+since $M_x$ is counted once in $R$ and once in $C$.
+
+\paragraph{One ternary coordinate.} For $K(1,7,1)$ we fix the ternary coordinate and then the
+binary coordinates $v_1,v_2,\dots$ one at a time, as in~\cite{ob}. At level $m$ there are $3\cdot
+2^m$ cells with $f=7-m$; a cell $(a,x)$ is adjacent to the two cells $(a',x)$, $a'\neq a$, and to
+the $m$ cells $(a,x+e_i)$. Each distribution at level $m+1$ refines one at level $m$, and the
+inequality is imposed at every level.
+
+\subsection{Symmetry and exact cases}
+
+Permuting the symbols of a ternary coordinate, permuting coordinates of equal alphabet size, and
+complementing binary coordinates are isometries, so equivalent distributions need only be
+considered once. For the grid these maps act as permutations of rows, permutations of columns and
+transposition, a group of order $72$. For the levels of $K(1,7,1)$ at level $2$ they act as the
+$3!$ permutations of the ternary symbols and the $2^2\cdot 2!$ signed permutations of $v_1,v_2$,
+a group of order $48$.
+
+Each remaining distribution becomes an integer program with one binary variable per word, one
+covering constraint per word (the sum of the variables in its ball is at least $1$) and one
+constraint per cell fixing the number of codewords in it. A covering code with $M$ words exists
+if and only if at least one of these programs is feasible.
+
+\section{Computation}
+
+All computations were run single-threaded on one core of an Intel Core Ultra~7 255HX, with
+Gurobi~13.0 (gurobipy, size-limited licence) and IBM CPLEX~22.2 (Community Edition). The largest
+models, for $K(2,6,1)$, have $576$ variables and $585$ constraints, within both licences.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrrccl}
+\toprule
+Entry & $M$ & distrib. & cases & Gurobi & CPLEX & further solvers \\
+\midrule
+$K(2,5,1)$ & 32 & 306     & 10  & all inf. & all inf. & SCIP, HiGHS: all inf. \\
+           & 33 & 1\,194  & 32  & all inf. & all inf. & SCIP: all; HiGHS: 31 of 32 \\
+\midrule
+$K(1,7,1)$ & 42 & 596     & 24  & all inf. & all inf. & SCIP: all inf. \\
+           & 43 & 3\,936  & 109 & all inf. & all inf. & SCIP: all inf. \\
+           & 44 & 18\,108 & 489 & all inf. & all inf. & -- \\
+\midrule
+$K(2,6,1)$ & 57 & 372     & 14  & all inf. & all inf. & -- \\
+           & 58 & 2\,637  & 64  & all inf. & all inf. & -- \\
+\bottomrule
+\end{tabular}
+\caption{The computation. ``Distrib.'' counts the distributions over the cells (for
+$K(1,7,1)$, at level $2$) that satisfy Lemma~\ref{lem:count}; ``cases'' counts them up to
+symmetry, the integer programs solved; ``inf.'' means infeasible. One HiGHS case for $K(2,5,1)$ was still running after 30 minutes and was not
+completed; SCIP was stopped after part of the $K(1,7,1)$ cases at $M=44$ for lack of speed.}
+\label{tab:computation}
+\end{table}
+
+Table~\ref{tab:computation} lists the cases. Every case of every entry was found infeasible by
+both Gurobi and CPLEX. The longest single case took $54$ seconds with Gurobi and $10$ minutes with
+CPLEX (both for $K(2,6,1)$ at $M=58$); the total for all cases was under $30$ minutes with Gurobi
+and under one hour with CPLEX. SCIP~10.0 and HiGHS (through SciPy~1.16.3) were used as further
+checks where their speed allowed.
+
+\section{Verification}
+
+A false ``no code exists'' could come from a wrong counting inequality, an incomplete list of
+distributions, a faulty symmetry reduction, a wrong integer program, or a solver error. Each was
+checked separately.
+\begin{enumerate}
+\item \textbf{The inequality from the definition.} For every cell $S_x$ and every word $u$, the
+  number of words of $S_x$ whose ball contains $u$ was computed from Hamming distances alone. In
+  every case it depends only on the cell of $u$ and equals the coefficient in
+  Lemma~\ref{lem:count}: $1+f$ for $u\in S_x$, $1$ for adjacent cells and $0$ otherwise. This was
+  done for the grid with $b=5,6$ and for levels $0$, $1$, $2$ of $K(1,7,1)$.
+\item \textbf{Completeness of the distributions.} For $K(2,5,1)$, a separate vectorised
+  enumeration of all $76\,904\,685$ ways to place $32$ words in nine cells ($95\,548\,245$ for
+  $33$), using the coefficients computed in step~1, gives exactly the $306$ ($1\,194$)
+  distributions of Table~\ref{tab:computation}. For $K(1,7,1)$, a separate brute-force enumeration
+  through levels $0$, $1$, $2$ gives exactly $596$, $3\,936$ and $18\,108$. For $K(2,6,1)$, where
+  a full enumeration is too slow, the case lists come from a fast enumerator based on
+  \eqref{eq:grid}; on seven smaller instances ($b=3,4,5$) its output is identical to that of the
+  direct brute-force enumerator.
+\item \textbf{Symmetry reduction.} With the group elements written out by separate code, every
+  distribution in step~2 is equivalent to one of the cases solved, and every case solved occurs.
+\item \textbf{The integer program.} A real covering code satisfies the program for its own cell
+  distribution, and the same code with one word removed does not: a $36$-word code for
+  $K(2,5,1)$, the $48$-word record code for $K(1,7,1)$, and a $74$-word code for $K(2,6,1)$
+  (all confirmed by an independent brute-force checker).
+\item \textbf{Known values.} The same pipelines reproduce $K(2,3,1)=12$, $K(2,4,1)=20$,
+  $K(1,5,1)=16$ and $K(1,6,1)=24$: each reports no code one below the known value and finds a code
+  at the known value, confirmed by the checker. Gurobi and CPLEX each pass these controls.
+\item \textbf{Solvers.} Every case was decided by two solvers from different developers. The models
+  for $K(2,5,1)$ and $K(2,6,1)$ were built by separate code for each solver; for $K(1,7,1)$ both
+  solvers received models built by the same code, which step~4 tests.
+\end{enumerate}
+
+\begin{remark}
+All the solvers use floating-point arithmetic, so each verdict is evidence rather than an exact
+certificate. The independent agreement of two commercial-grade solvers on every case, together
+with the checks above, is the basis of Theorem~\ref{thm:main}.
+\end{remark}
+
+\section{Remarks}
+
+\begin{enumerate}
+\item For $K(1,7,1)$ we showed separately~\cite{companion} that any covering code with at most
+  $47$ words has trivial automorphism group. With Theorem~\ref{thm:main}, a code improving the
+  upper bound $48$ would have $45$, $46$ or $47$ words and no symmetry.
+\item The method continues to the next sizes: $K(2,5,1)$ at $M=34$ has $93$ cases up to symmetry,
+  $K(1,7,1)$ at $M=45$ has $1\,848$, and $K(2,6,1)$ at $M=59$ has $221$. These were not
+  completed.
+\item The entries $K(3,4,1)$ and $K(5,1,1)$ have three or more ternary coordinates, which the
+  programs used here do not handle; they were not attempted.
+\end{enumerate}
+
+\paragraph{Code and data.} All programs and logs are in the public repository
+\begin{center}\url{https://github.com/Noah-Parsons/covering-codes}\end{center}
+\begin{itemize}
+\item grid method: \texttt{src/split\_t2.py};
+\item its rechecks: \texttt{src/recheck\_t2\_gurobi.py},
+\item[] \hphantom{its rechecks: }\texttt{src/recheck\_t2\_cplex.py}, \texttt{src/recheck\_t2\_highs.py};
+\item its checks: \texttt{src/verify\_t2\_distributions.py};
+\item level method: \texttt{src/exact\_dist.py}, \texttt{src/leaves\_t1.py};
+  checks \texttt{src/verify\_t1\_leaves.py};
+\item brute-force code checker: \texttt{src/checker.py}; logs in \texttt{results/}.
+\end{itemize}
+
+\begin{thebibliography}{9}
+
+\bibitem{bow} R.~Bertolo, P.~R.~J. Östergård and W.~D. Weakley, An updated table of
+binary/ternary mixed covering codes, \emph{J. Combin. Des.} 12 (2004), 157--176.
+
+\bibitem{cohen-book} G.~Cohen, I.~Honkala, S.~Litsyn and A.~Lobstein, \emph{Covering Codes},
+North-Holland, Amsterdam, 1997.
+
+\bibitem{hr} H.~Hämäläinen and S.~Rankinen, Upper bounds for football pool problems and mixed
+covering codes, \emph{J. Combin. Theory Ser.~A} 56 (1991), 84--95.
+
+\bibitem{keri} G.~Kéri, Tables for bounds on covering codes,
+\url{https://old.sztaki.hu/~keri/codes/index.htm} (accessed 16 October 2026).
+
+\bibitem{lqs} W.~Lang, J.~Quistorff and E.~Schneider, New results on integer programming for
+codes, \emph{Congr. Numer.} 188 (2007), 97--107.
+
+\bibitem{ob} P.~R.~J. Östergård and U.~Blass, On the size of optimal binary codes of length $9$
+and covering radius $1$, \emph{IEEE Trans. Inform. Theory} 47 (2001), 2556--2557.
+
+\bibitem{oh} P.~R.~J. Östergård and H.~O. Hämäläinen, A new table of binary/ternary mixed
+covering codes, \emph{Des. Codes Cryptogr.} 11 (1997), 151--178.
+
+\bibitem{companion} N.~Parsons, Improving the covering code bound $K(1,7,1)\le 48$ requires an
+asymmetric code, manuscript, 2026.
+
+\end{thebibliography}
+\end{document}

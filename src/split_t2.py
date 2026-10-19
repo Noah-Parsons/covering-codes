@@ -39,7 +39,55 @@ def symmetries():
     return out
 
 
+def canonical(d, G):
+    """Least image of a {cell: count} distribution under the 72 symmetries."""
+    return min(tuple(d[next(k for k in CELLS if g[k] == c)] for c in CELLS) for g in G)
+
+
 def distributions(B, M):
+    """Fast version. The block inequality (1+B) M_c + sum_{N(c)} M_d >= 2^B is the same as
+        (B-1) M_c + R_a + C_b >= 2^B,
+    with R_a, C_b the totals of c's row and column (the row and column each contain M_c once).
+    Row and column permutations can sort both margins, so only sorted (R, C) are tried; each
+    3x3 matrix with those margins is then built from its four top-left entries. Results are
+    reduced by all 72 symmetries, exactly as distributions_slow does."""
+    Q = 1 << B
+    G = symmetries()
+    found = set()
+
+    def sorted_triples(total, cap):
+        return [(x, y, total - x - y) for x in range(total + 1) for y in range(x, total + 1)
+                if total - x - y >= y and total - x - y <= cap]
+
+    for R in sorted_triples(M, 3 * Q):
+        for C in sorted_triples(M, 3 * Q):
+            lo = [[max(0, -(-(Q - R[a] - C[b]) // (B - 1))) for b in range(3)] for a in range(3)]
+            hi = [[min(Q, R[a], C[b]) for b in range(3)] for a in range(3)]
+            if sum(map(sum, lo)) > M:
+                continue
+            for m00 in range(lo[0][0], hi[0][0] + 1):
+                for m01 in range(lo[0][1], hi[0][1] + 1):
+                    m02 = R[0] - m00 - m01
+                    if not lo[0][2] <= m02 <= hi[0][2]:
+                        continue
+                    for m10 in range(lo[1][0], hi[1][0] + 1):
+                        m20 = C[0] - m00 - m10
+                        if not lo[2][0] <= m20 <= hi[2][0]:
+                            continue
+                        for m11 in range(lo[1][1], hi[1][1] + 1):
+                            m12 = R[1] - m10 - m11
+                            m21 = C[1] - m01 - m11
+                            m22 = R[2] - m20 - m21
+                            if not (lo[1][2] <= m12 <= hi[1][2] and lo[2][1] <= m21 <= hi[2][1]
+                                    and lo[2][2] <= m22 <= hi[2][2]):
+                                continue
+                            d = dict(zip(CELLS, (m00, m01, m02, m10, m11, m12, m20, m21, m22)))
+                            found.add(canonical(d, G))
+    return sorted(found)
+
+
+def distributions_slow(B, M):
+    """Original version: every split of M into nine cells, then the block inequality."""
     Q = 1 << B
     G = symmetries()
     found = set()

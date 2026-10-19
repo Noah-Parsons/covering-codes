@@ -224,3 +224,19 @@ M=15 and K(1,6,1) M=24). Controls with leaves_t1 + Gurobi: K(1,5,1) none at 15, 
 K(1,6,1) none at 23, code at 24 (codes checker VALID).
 
 Round 8 addendum: CPLEX 22.2 Community Edition (`pip install cplex`, limit 1000 variables/constraints; models have 384 / 396) added to `src/leaves_t1.py`. Controls pass (none at 15/23, codes at 16/24, checker VALID); M=42: 24 infeasible in 14 s. **M=44: Gurobi and CPLEX both find all 489 cases infeasible, so K(1,7,1) >= 45.** SCIP was too slow at M=44 and was stopped.
+
+## Round 9 (2026-10-18): K(2,6,1) >= 59 (improves Kéri's lower bound 57)
+
+Kéri (2011): 57 <= K(2,6,1) <= 64 (576 words). Same block method as round 7 (3x3 grid of blocks,
+each a Q_6). `split_t2.distributions` rewritten: the block inequality is equivalent to
+(B-1) M_c + R_a + C_b >= 2^B with row/column totals R, C; sorted margins, then the four free
+entries. The fast lister gives identical case lists to the old brute-force lister
+(`distributions_slow`) for (B,M) = (3,11), (3,12), (4,19), (4,20), (5,32), (5,33), (5,34), about
+1000x faster; the old lister is too slow to run at B = 6.
+
+M = 57: 14 cases. Gurobi 13: 14 infeasible (2-8 s each). CPLEX 22.2 (`src/recheck_t2_cplex.py`,
+model built separately; controls pass at 11/12/19/20 and it confirms K(2,5,1) M=32): 14 infeasible
+(<= 89 s). Block coefficients from Hamming distances: 7 / 1 / 0 as in the inequality. Model check
+inside the Gurobi model: a real 74-word code (checker VALID; best Gurobi found in 5 min) with its
+own block counts is accepted, the same code minus one word is rejected.
+**So K(2,6,1) >= 58.** M = 58 (64 cases): Gurobi 64 infeasible, CPLEX 64 infeasible. **So K(2,6,1) >= 59.**

@@ -4,3 +4,5 @@
 {"B": 4, "M": 20, "cases": 45, "tally": {"infeasible": 44, "feasible": 1}, "tlim": 60.0}
 {"B": 5, "M": 32, "cases": 10, "tally": {"infeasible": 10}, "tlim": 600.0}
 {"B": 5, "M": 33, "cases": 32, "tally": {"infeasible": 32}, "tlim": 600.0}
+{"B": 6, "M": 57, "cases": 14, "tally": {"infeasible": 14}, "tlim": 600.0}
+{"B": 6, "M": 58, "cases": 64, "tally": {"infeasible": 64}, "tlim": 600.0}
